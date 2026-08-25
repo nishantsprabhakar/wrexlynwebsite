@@ -1,20 +1,13 @@
 /**
  * Wrexlyn — Copyright (c) 2026 Nishant Prabhakar. All rights reserved.
  *
- * Browser-only chat demo. No backend: Google Sign-In runs entirely
- * client-side (Google Identity Services), nothing about who signed in is
- * stored anywhere — it's just used to show a name/photo for this session.
+ * Browser-only chat demo with no authentication or Wrexlyn backend.
  * The API key you enter is kept only in this browser's localStorage and is
  * sent directly from your browser to the provider you pick — it is never
  * seen by any server of ours, because there isn't one.
  */
 (function () {
   "use strict";
-
-  // Fill this in with your own OAuth 2.0 Web Client ID from
-  // https://console.cloud.google.com/apis/credentials (see docs/README.md).
-  // Sign-in simply won't work until this is a real client ID.
-  const GOOGLE_CLIENT_ID = "YOUR_GOOGLE_OAUTH_CLIENT_ID.apps.googleusercontent.com";
 
   const STORAGE_KEY = "wrexlyn_web_setup";
 
@@ -40,20 +33,13 @@
 
   const el = {
     gate: document.getElementById("gate"),
-    gateSignedOut: document.getElementById("gate-signed-out"),
     gateSetup: document.getElementById("gate-setup"),
-    googleBtn: document.getElementById("google-signin-btn"),
-    userChip: document.getElementById("user-chip"),
-    userAvatar: document.getElementById("user-avatar"),
-    userName: document.getElementById("user-name"),
-    signoutLink: document.getElementById("signout-link"),
     providerSelect: document.getElementById("provider-select"),
     apiKeyInput: document.getElementById("api-key-input"),
     apiKeyLabel: document.getElementById("api-key-label"),
     providerNote: document.getElementById("provider-note"),
     setupError: document.getElementById("setup-error"),
     startBtn: document.getElementById("start-btn"),
-    quickstartBtn: document.getElementById("quickstart-btn"),
     chatShell: document.getElementById("chat-shell"),
     chatMetaProvider: document.getElementById("chat-meta-provider"),
     changeSetupLink: document.getElementById("change-setup-link"),
@@ -62,7 +48,6 @@
     sendBtn: document.getElementById("send-btn"),
   };
 
-  let currentUser = null; // { name, email, picture } from the Google ID token — session-only, never persisted
   let setup = null; // { provider, apiKey } — persisted to localStorage on this device only
 
   function populateProviderSelect() {
@@ -71,70 +56,6 @@
       .join("");
   }
   populateProviderSelect();
-
-  // ---------- Google Sign-In ----------
-
-  function decodeJwt(token) {
-    const payload = token.split(".")[1];
-    const json = decodeURIComponent(
-      atob(payload.replace(/-/g, "+").replace(/_/g, "/"))
-        .split("")
-        .map((c) => "%" + c.charCodeAt(0).toString(16).padStart(2, "0"))
-        .join("")
-    );
-    return JSON.parse(json);
-  }
-
-  function handleGoogleCredential(response) {
-    const claims = decodeJwt(response.credential);
-    currentUser = { name: claims.name || claims.email, email: claims.email, picture: claims.picture };
-    renderSignedIn();
-  }
-
-  function initGoogleSignIn() {
-    if (GOOGLE_CLIENT_ID.startsWith("YOUR_")) {
-      el.gateSignedOut.innerHTML =
-        '<p class="error-text">Google Sign-In isn\'t configured yet — see docs/README.md for the two-minute setup ' +
-        "(create an OAuth Client ID, paste it into app.js). Showing the setup panel directly for now so you can " +
-        'still try the chat demo.</p><button class="btn btn-primary btn-full" id="skip-signin-btn">Continue without signing in</button>';
-      document.getElementById("skip-signin-btn").addEventListener("click", () => {
-        currentUser = { name: "Guest", email: "", picture: "" };
-        renderSignedIn();
-      });
-      return;
-    }
-    window.google.accounts.id.initialize({
-      client_id: GOOGLE_CLIENT_ID,
-      callback: handleGoogleCredential,
-    });
-    window.google.accounts.id.renderButton(el.googleBtn, { theme: "outline", size: "large", text: "signin_with" });
-  }
-
-  function renderSignedIn() {
-    el.gateSignedOut.hidden = true;
-    el.gateSetup.hidden = false;
-    el.userChip.hidden = false;
-    if (currentUser.picture) {
-      el.userAvatar.src = currentUser.picture;
-      el.userAvatar.hidden = false;
-    }
-    el.userName.textContent = currentUser.name;
-    loadSetup();
-  }
-
-  function signOut() {
-    currentUser = null;
-    setup = null;
-    el.userChip.hidden = true;
-    el.userAvatar.hidden = true;
-    el.chatShell.classList.remove("active");
-    el.gate.hidden = false;
-    el.gateSetup.hidden = true;
-    el.gateSignedOut.hidden = false;
-    if (window.google && !GOOGLE_CLIENT_ID.startsWith("YOUR_")) window.google.accounts.id.disableAutoSelect();
-  }
-
-  el.signoutLink.addEventListener("click", signOut);
 
   // ---------- Provider + API key setup ----------
 
@@ -174,17 +95,10 @@
     startChat();
   });
 
-  el.quickstartBtn.addEventListener("click", () => {
-    setup = { provider: "pollinations", apiKey: "" };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(setup));
-    startChat();
-  });
-
   el.changeSetupLink.addEventListener("click", () => {
     el.chatShell.classList.remove("active");
     el.gate.hidden = false;
     el.gateSetup.hidden = false;
-    el.gateSignedOut.hidden = true;
   });
 
   function startChat() {
@@ -305,5 +219,5 @@
     el.composerInput.style.height = Math.min(el.composerInput.scrollHeight, 160) + "px";
   });
 
-  initGoogleSignIn();
+  loadSetup();
 })();

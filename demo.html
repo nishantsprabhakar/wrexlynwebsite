@@ -4,10 +4,9 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Wrexlyn — Chat Demo</title>
-<meta name="description" content="Browser-only chat demo of Wrexlyn — sign in, bring your own API key, talk to the model. No file/shell tools; that requires the local desktop app." />
+<meta name="description" content="Browser-only chat demo of Wrexlyn — choose a supported provider, bring your own API key, and talk to the model." />
 <link rel="icon" href="icon-512.png" />
-<link rel="stylesheet" href="style.css?v=20260810" />
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+<link rel="stylesheet" href="style.css?v=20260825b" />
 </head>
 <body>
 
@@ -23,34 +22,14 @@
     <a href="documentation.html">Documentation</a>
     <a href="pitch.html">Pitch deck</a>
   </div>
-  <div class="user-chip" id="user-chip" hidden>
-    <img id="user-avatar" alt="" hidden />
-    <span id="user-name"></span>
-    <span class="signout-link" id="signout-link">sign out</span>
-  </div>
 </div>
 
 <div class="gate" id="gate">
   <div class="gate-card">
 
-    <div id="gate-signed-out">
-      <h1 class="gate-title">// SIGN IN TO CONTINUE</h1>
-      <p class="gate-desc">
-        This is a browser-only chat demo of Wrexlyn — sign in, then bring your own API key for whichever provider
-        you like, and talk to the model. It has no file or shell tools; that's what the
-        <span>licensed Wrexlyn desktop product</span>
-        is for — a static page genuinely can't run code on your machine.
-      </p>
-      <div id="google-signin-btn"></div>
-      <p class="disclaimer">
-        Sign-in runs entirely in your browser (Google Identity Services) — nothing about who you are is sent to or
-        stored on any server. It's just used to show your name here for this session.
-      </p>
-    </div>
-
-    <div id="gate-setup" hidden>
+    <div id="gate-setup">
       <h1 class="gate-title">// SET UP YOUR PROVIDER</h1>
-      <p class="gate-desc">Pick a provider and paste in your own free API key — Groq takes about a minute, no credit card. It's saved only in this browser's local storage and sent directly from your browser to that provider — never to us, because there's no "us" here to send it to.</p>
+      <p class="gate-desc">Pick a supported provider and paste in your API key. The key is saved only in this browser and sent directly to the selected provider. This static demo has no Wrexlyn backend and no access to your files or shell.</p>
 
       <label class="field-label" for="provider-select">Provider</label>
       <select id="provider-select"></select>
@@ -62,8 +41,6 @@
       <div class="error-text" id="setup-error"></div>
       <button class="btn btn-primary btn-full" id="start-btn">Start chatting</button>
 
-      <div class="gate-divider">or</div>
-      <button class="btn btn-full" id="quickstart-btn">Try instantly, no signup — Pollinations (free, occasionally unavailable)</button>
     </div>
 
   </div>
@@ -86,7 +63,7 @@
   Full execution platform: proprietary desktop deployment available by arrangement.
 </div>
 
-<script src="providers.js?v=20260810"></script>
-<script src="app.js?v=20260810"></script>
+<script src="providers.js?v=20260825b"></script>
+<script src="app.js?v=20260825b"></script>
 </body>
 </html>

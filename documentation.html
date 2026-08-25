@@ -471,14 +471,10 @@
     <section class="chapter" id="webdemo">
       <div class="chapter-head"><span class="chapter-num">07</span><h2>Web demo</h2></div>
       <div class="prose">
-        <p>A separate, deliberately scoped-down build: a static page hosted on GitHub Pages, sign in with Google, bring your own key, and chat — with an honest ceiling on what a static page can do.</p>
-        <p class="dim">No file or shell tools — a browser sandbox genuinely cannot run code on a visitor's machine, GitHub Pages or not. Google Sign-In is client-side only and nothing about who's signed in is stored anywhere. An entered API key is kept in that browser's local storage and sent directly from the browser to the chosen provider — this page never sees it.</p>
+        <p>A separate, deliberately scoped-down build: a static page hosted on GitHub Pages where a visitor chooses a supported provider, supplies their own key, and chats — with an honest ceiling on what a static page can do.</p>
+        <p class="dim">No sign-in, no Wrexlyn backend, and no file or shell tools. A browser sandbox genuinely cannot run code on a visitor's machine. An entered API key is kept in that browser's local storage and sent directly from the browser to the chosen provider — Wrexlyn never receives it.</p>
         <p>What the demo deliberately keeps: the same provider dispatch and retry logic as the full agent, so a rate-limited or slow provider behaves identically to how it behaves in the desktop build, and the same streaming response rendering. What it deliberately drops: the entire reliability runtime in &sect;02 (no filesystem to snapshot, no build to run), the document quality gate in &sect;12 (no file to write to disk), and the persistence in &sect;13 (no server-side project to remember preferences against) — because none of those have a coherent meaning without a local project and a local filesystem behind them. It exists to let someone evaluate the model conversation itself in under a minute, not to be a lighter version of the real tool.</p>
       </div>
-      <figure class="shot">
-        <img src="assets/screenshots/documentation-10.png" alt="" loading="lazy" decoding="async" />
-        <figcaption>The browser-only demo — same identity, same markdown rendering, no backend.</figcaption>
-      </figure>
     </section>
 
     <section class="chapter" id="security">

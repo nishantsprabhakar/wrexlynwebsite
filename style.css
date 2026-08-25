@@ -131,7 +131,7 @@ a { color: var(--accent); }
 }
 .signout-link:hover { color: var(--danger); }
 
-/* ---------- Centered gate (sign-in / setup) ---------- */
+/* ---------- Centered provider setup gate ---------- */
 
 .gate {
   flex: 1;
