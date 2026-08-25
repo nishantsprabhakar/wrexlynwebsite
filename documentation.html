@@ -80,6 +80,7 @@
     display: flex; flex-direction: column; gap: 22px;
   }
   .rail-mark { display: flex; align-items: center; gap: 9px; font-family: var(--mono); font-weight: 700; font-size: 15px; letter-spacing: 0.02em; }
+  .rail-mark img { width: 28px; height: 28px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(0,229,160,.42)); }
   .rail-mark .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); flex-shrink: 0; }
   .rail-meta { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); line-height: 1.6; }
   .site-nav { display: flex; flex-direction: column; gap: 2px; padding: 10px 0; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
@@ -199,7 +200,8 @@
       overflow-x: auto; scrollbar-width: none; white-space: nowrap;
     }
     .mobile-bar::-webkit-scrollbar { display: none; }
-    .mobile-bar .mobile-brand { color: var(--accent); font-weight: 700; margin-right: 6px; }
+    .mobile-bar .mobile-brand { display: inline-flex; align-items: center; gap: 7px; color: var(--accent); font-weight: 700; margin-right: 6px; }
+    .mobile-bar .mobile-brand img { width: 23px; height: 23px; object-fit: contain; }
     .mobile-bar a { flex: 0 0 auto; border: 1px solid var(--line); border-radius: 999px; padding: 7px 11px; color: var(--ink-dim); font: 11px var(--mono); }
     .mobile-bar a.current { border-color: var(--accent); color: var(--accent); }
     main { display: block; width: 100%; max-width: 100%; min-width: 0; padding-bottom: 60px; }
@@ -235,7 +237,7 @@
 <body>
 
 <div class="mobile-bar" aria-label="Mobile navigation">
-  <span class="mobile-brand">WREXLYN</span>
+  <span class="mobile-brand"><img src="icon-512.png" alt="Wrexlyn logo">WREXLYN</span>
   <a href="index.html">Home</a>
   <a href="demo.html">Demo</a>
   <a href="documentation.html" class="current">Docs</a>
@@ -244,7 +246,7 @@
 
 <div class="shell">
   <aside class="rail">
-    <div class="rail-mark"><span class="dot"></span>WREXLYN</div>
+    <div class="rail-mark"><img src="icon-512.png" alt="Wrexlyn logo">WREXLYN</div>
     <div class="rail-meta">by Nishant Prabhakar<br />Technical Documentation<br />v0.1 &middot; August 2026</div>
     <div class="site-nav">
       <a href="index.html">&larr; Wrexlyn home</a>
