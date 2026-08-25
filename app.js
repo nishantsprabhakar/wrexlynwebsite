@@ -1,10 +1,12 @@
 /**
  * Wrexlyn — Copyright (c) 2026 Nishant Prabhakar. All rights reserved.
  *
- * Browser-only chat demo with no authentication or Wrexlyn backend.
- * The API key you enter is kept only in this browser's localStorage and is
- * sent directly from your browser to the provider you pick — it is never
- * seen by any server of ours, because there isn't one.
+ * Browser-only chat demo. The one call to a Wrexlyn-operated server is
+ * registration (name + email, POSTed to the same license-server the desktop
+ * app registers against — see registerVisitor below); it never sees the
+ * model provider API key. That key is kept only in this browser's
+ * localStorage and sent directly from your browser to the provider you
+ * pick — no Wrexlyn server is ever in that path.
  *
  * The chrome (theme system, topbar, sidebar) mirrors the real desktop/web app
  * as closely as a static, backend-less page can — same 8 themes, same
@@ -17,6 +19,46 @@
 
   const STORAGE_KEY = "wrexlyn_web_setup";
   const THEME_KEY = "wrexlyn-theme";
+  const VISITOR_ID_KEY = "wrexlyn_web_visitor_id";
+  const LICENSE_SERVER_URL = "https://wrexlyn-license-server.onrender.com";
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // ---------- Demo registration (name + email -> the same license-server the desktop app
+  // uses, see documentation.html#security) ----------
+
+  /** A per-browser id, generated once and reused on every visit, so re-registering (e.g. after
+   *  clearing the gate via the settings button) updates the same admin-dashboard row instead of
+   *  creating a new one each time. Never a substitute for a real installed-app device id — this
+   *  is a website visitor, prefixed so it's never mistaken for one in the admin dashboard. */
+  function getOrCreateVisitorId() {
+    try {
+      let id = localStorage.getItem(VISITOR_ID_KEY);
+      if (!id) {
+        id = "web-" + (crypto.randomUUID ? crypto.randomUUID() : Date.now() + "-" + Math.random().toString(36).slice(2));
+        localStorage.setItem(VISITOR_ID_KEY, id);
+      }
+      return id;
+    } catch {
+      // localStorage unavailable (private browsing, etc.) -- a fresh id every call still lets
+      // registration proceed, it just won't dedupe across visits from this browser.
+      return "web-" + Date.now() + "-" + Math.random().toString(36).slice(2);
+    }
+  }
+
+  /** Best-effort: a registration failure (offline, the license-server napping on Render's free
+   *  tier, a CORS hiccup) must never block someone from actually trying the demo -- it only means
+   *  this visit won't show up on the admin dashboard. Never throws. */
+  async function registerVisitor(name, email) {
+    try {
+      await fetch(`${LICENSE_SERVER_URL}/api/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ deviceId: getOrCreateVisitorId(), name, email }),
+      });
+    } catch (err) {
+      console.warn("Wrexlyn demo: registration call failed (continuing anyway):", err);
+    }
+  }
 
   // ---------- Theme system (ported from the real app: same ids, same swatch colors) ----------
 
@@ -88,6 +130,8 @@
 
   const el = {
     gate: document.getElementById("gate"),
+    visitorNameInput: document.getElementById("visitor-name-input"),
+    visitorEmailInput: document.getElementById("visitor-email-input"),
     providerSelect: document.getElementById("provider-select"),
     apiKeyInput: document.getElementById("api-key-input"),
     apiKeyLabel: document.getElementById("api-key-label"),
@@ -130,6 +174,10 @@
         el.providerSelect.value = saved.provider;
         el.apiKeyInput.value = saved.apiKey || "";
       }
+      if (saved) {
+        el.visitorNameInput.value = saved.name || "";
+        el.visitorEmailInput.value = saved.email || "";
+      }
     } catch {
       // corrupt/absent — start fresh
     }
@@ -139,6 +187,16 @@
   el.providerSelect.addEventListener("change", renderProviderNote);
 
   el.startBtn.addEventListener("click", async () => {
+    const name = el.visitorNameInput.value.trim();
+    const email = el.visitorEmailInput.value.trim();
+    if (!name) {
+      el.setupError.textContent = "Enter your name to continue.";
+      return;
+    }
+    if (!EMAIL_RE.test(email)) {
+      el.setupError.textContent = "Enter a valid email to continue.";
+      return;
+    }
     const provider = el.providerSelect.value;
     const meta = PROVIDER_META[provider];
     const apiKey = el.apiKeyInput.value.trim();
@@ -149,10 +207,10 @@
     el.setupError.textContent = "";
     el.startBtn.disabled = true;
     el.startBtn.textContent = "Checking available models…";
-    const model = await resolveModel(provider, apiKey);
+    const [model] = await Promise.all([resolveModel(provider, apiKey), registerVisitor(name, email)]);
     el.startBtn.disabled = false;
     el.startBtn.textContent = "Start chatting";
-    setup = { provider, apiKey, model };
+    setup = { provider, apiKey, model, name, email };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(setup));
     startChat();
   });

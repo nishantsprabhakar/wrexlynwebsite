@@ -474,7 +474,7 @@
       <div class="chapter-head"><span class="chapter-num">07</span><h2>Web demo</h2></div>
       <div class="prose">
         <p>A separate, deliberately scoped-down build: a static page hosted on GitHub Pages where a visitor chooses a supported provider, supplies their own key, and chats — with an honest ceiling on what a static page can do.</p>
-        <p class="dim">No sign-in, no Wrexlyn backend, and no file or shell tools. A browser sandbox genuinely cannot run code on a visitor's machine. An entered API key is kept in that browser's local storage and sent directly from the browser to the chosen provider — Wrexlyn never receives it.</p>
+        <p class="dim">A one-time name/email registration gates entry, recorded by the same Wrexlyn-operated registration service the desktop app uses — see &sect;08. Beyond that, no Wrexlyn backend and no file or shell tools: a browser sandbox genuinely cannot run code on a visitor's machine. An entered API key is kept in that browser's local storage and sent directly from the browser to the chosen provider — Wrexlyn never receives it.</p>
         <p>What the demo deliberately keeps: the same provider dispatch and retry logic as the full agent, so a rate-limited or slow provider behaves identically to how it behaves in the desktop build, and the same streaming response rendering. What it deliberately drops: the entire reliability runtime in &sect;02 (no filesystem to snapshot, no build to run), the document quality gate in &sect;12 (no file to write to disk), and the persistence in &sect;13 (no server-side project to remember preferences against) — because none of those have a coherent meaning without a local project and a local filesystem behind them. It exists to let someone evaluate the model conversation itself in under a minute, not to be a lighter version of the real tool.</p>
       </div>
     </section>
@@ -488,6 +488,7 @@
         <div class="kv-row"><span class="k">Shell execution</span><span class="v">Commands are delegated to a separated shell-execution service, constrained to the selected workspace and gated by the risk and permission system in &sect;02. This limits process coupling, but is not a container or virtual-machine security boundary.</span></div>
         <div class="kv-row"><span class="k">Learned data</span><span class="v">Preferences and saved skills (&sect;13) are written to plain local files under the project or the user's home directory, never to a remote service — the same residency guarantee as sessions and generated documents.</span></div>
         <div class="kv-row"><span class="k">Undo</span><span class="v">Every mutating action is snapshotted (&sect;02) before it runs, so a bad turn — code or document — can be reverted to its exact prior state with one action, without relying on a separate backup.</span></div>
+        <div class="kv-row"><span class="k">Web demo registration</span><span class="v">The browser chat demo (&sect;07) asks for your name and email and sends them to a Wrexlyn-operated registration service — this is the one exception to local-only residency on this site. Your model provider API key is never part of that call; it still goes straight from your browser to the provider you chose.</span></div>
       </div>
     </section>
 

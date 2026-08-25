@@ -333,7 +333,7 @@ a { color: var(--accent); }
   margin: 16px 0 6px;
 }
 
-select, input[type="password"], input[type="text"] {
+select, input[type="password"], input[type="text"], input[type="email"] {
   width: 100%;
   background: var(--bg);
   border: 1px solid var(--border-soft);

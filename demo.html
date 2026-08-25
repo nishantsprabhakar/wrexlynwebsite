@@ -97,7 +97,13 @@
     <div class="gate" id="gate">
       <div class="gate-card">
         <h1 class="gate-title">// SET UP YOUR PROVIDER</h1>
-        <p class="gate-desc">Pick a supported provider and paste in your API key. The key is saved only in this browser and sent directly to the selected provider — this static demo has no Wrexlyn backend and no access to your files or shell.</p>
+        <p class="gate-desc">Tell us who's trying the demo, then pick a supported provider and paste in your API key. The key is saved only in this browser and sent directly to the selected provider — Wrexlyn's own backend never sees it. Your name and email go to Wrexlyn's registration service, the same one the desktop app uses (see <a href="documentation.html#security" target="_blank" rel="noopener">Security &amp; privacy</a>).</p>
+
+        <label class="field-label" for="visitor-name-input">Name</label>
+        <input type="text" id="visitor-name-input" autocomplete="name" placeholder="Your name" />
+
+        <label class="field-label" for="visitor-email-input">Email</label>
+        <input type="email" id="visitor-email-input" autocomplete="email" placeholder="you@example.com" />
 
         <label class="field-label" for="provider-select">Provider</label>
         <select id="provider-select"></select>
