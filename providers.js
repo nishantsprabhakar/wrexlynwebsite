@@ -12,6 +12,16 @@
  * below. If you ever swap in the official OpenAI JS SDK, its extra
  * `x-stainless-*` headers break Gemini's CORS preflight specifically
  * (not the other providers) — stick to raw fetch for this file.
+ *
+ * Models are resolved live rather than hardcoded: every provider eventually
+ * deprecates a free-tier model (this file has already shipped two dead
+ * defaults — Groq's llama-3.3-70b-versatile and Gemini's gemini-2.5-flash —
+ * that broke this demo in production before this fix). Each provider's own
+ * /models list endpoint is fetched at "Start chatting" time and a currently-
+ * live model is picked; the result is cached in localStorage for 24h so a
+ * fresh deprecation clears itself out within a day with no redeploy needed,
+ * and a lookup failure (bad key, network blip, future CORS regression)
+ * falls back to today's known-good hardcoded id instead of breaking outright.
  */
 const WREXLYN_SYSTEM_PROMPT =
   "You are Wrexlyn, an AI assistant created by Nishant Prabhakar. This is the browser-only chat demo — you have " +
@@ -78,52 +88,129 @@ async function openAiCompatibleStream(url, apiKey, model, messages, onDelta) {
   await consumeOpenAiSseStream(res, onDelta);
 }
 
+// ---------- Live model discovery ----------
+
+const MODEL_CACHE_KEY = "wrexlyn_model_cache_v1";
+const MODEL_CACHE_TTL_MS = 24 * 60 * 60 * 1000;
+
+function readModelCache(providerId) {
+  try {
+    const cache = JSON.parse(localStorage.getItem(MODEL_CACHE_KEY) || "{}");
+    const entry = cache[providerId];
+    if (entry && Date.now() - entry.at < MODEL_CACHE_TTL_MS) return entry.model;
+  } catch {}
+  return null;
+}
+function writeModelCache(providerId, model) {
+  try {
+    const cache = JSON.parse(localStorage.getItem(MODEL_CACHE_KEY) || "{}");
+    cache[providerId] = { model, at: Date.now() };
+    localStorage.setItem(MODEL_CACHE_KEY, JSON.stringify(cache));
+  } catch {}
+}
+
+/** Fetches and normalizes a provider's /models list — handles both the OpenAI-shaped {data:[...]}
+ *  response and Gemini's {models:[...]} shape, stripping Gemini's "models/" resource-name prefix. */
+async function fetchModelIds(url, apiKey) {
+  const res = await fetch(url, {
+    headers: apiKey ? { Authorization: `Bearer ${apiKey}` } : {},
+  });
+  if (!res.ok) throw new Error(`Model list request failed: ${res.status}`);
+  const data = await res.json();
+  const list = data.data || data.models || [];
+  return list.map((m) => String(m.id || m.name || "").replace(/^models\//, "")).filter(Boolean);
+}
+
+function pickModel(ids, preferred, fallback) {
+  for (const p of preferred) {
+    const hit = ids.find((id) => id.includes(p));
+    if (hit) return hit;
+  }
+  return ids[0] || fallback;
+}
+
+async function resolveModel(providerId, apiKey) {
+  const meta = PROVIDER_META[providerId];
+  const cached = readModelCache(providerId);
+  if (cached) return cached;
+  try {
+    const model = await meta.discoverModel(apiKey);
+    writeModelCache(providerId, model);
+    return model;
+  } catch {
+    return meta.fallbackModel;
+  }
+}
+
 const PROVIDER_META = {
   // Default (first = pre-selected in the dropdown).
   groq: {
     label: "Groq",
-    model: "llama-3.3-70b-versatile",
+    fallbackModel: "openai/gpt-oss-120b",
     needsKey: true,
     note: 'Free key at <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a>.',
-    stream: (messages, apiKey, onDelta) =>
-      openAiCompatibleStream("https://api.groq.com/openai/v1/chat/completions", apiKey, "llama-3.3-70b-versatile", messages, onDelta),
+    discoverModel: async (apiKey) => {
+      const ids = (await fetchModelIds("https://api.groq.com/openai/v1/models", apiKey)).filter(
+        (id) => !/whisper|guard|moderation|tts/i.test(id)
+      );
+      return pickModel(ids, ["gpt-oss-120b", "gpt-oss", "qwen3", "llama-3.1", "llama"], "openai/gpt-oss-120b");
+    },
+    stream: (messages, apiKey, model, onDelta) =>
+      openAiCompatibleStream("https://api.groq.com/openai/v1/chat/completions", apiKey, model, messages, onDelta),
   },
   openrouter: {
     label: "OpenRouter",
-    model: "openai/gpt-oss-20b:free",
+    fallbackModel: "openai/gpt-oss-20b:free",
     needsKey: true,
     note: 'Free key at <a href="https://openrouter.ai/keys" target="_blank" rel="noopener">openrouter.ai/keys</a> — pick a ":free" model to avoid needing credits.',
-    stream: (messages, apiKey, onDelta) =>
-      openAiCompatibleStream("https://openrouter.ai/api/v1/chat/completions", apiKey, "openai/gpt-oss-20b:free", messages, onDelta),
+    discoverModel: async () => {
+      const ids = (await fetchModelIds("https://openrouter.ai/api/v1/models", "")).filter((id) => id.endsWith(":free"));
+      return pickModel(ids, ["gpt-oss", "llama", "qwen"], "openai/gpt-oss-20b:free");
+    },
+    stream: (messages, apiKey, model, onDelta) =>
+      openAiCompatibleStream("https://openrouter.ai/api/v1/chat/completions", apiKey, model, messages, onDelta),
   },
   gemini: {
     label: "Google Gemini",
-    model: "gemini-3.5-flash",
+    fallbackModel: "gemini-3.6-flash",
     needsKey: true,
     note: 'Free key (no credit card) at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>.',
-    stream: (messages, apiKey, onDelta) =>
+    discoverModel: async (apiKey) => {
+      const ids = await fetchModelIds(`https://generativelanguage.googleapis.com/v1beta/openai/models`, apiKey);
+      return pickModel(ids, ["gemini-3.6-flash", "gemini-3-flash", "gemini-flash", "flash"], "gemini-3.6-flash");
+    },
+    stream: (messages, apiKey, model, onDelta) =>
       openAiCompatibleStream(
         "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
         apiKey,
-        "gemini-2.5-flash",
+        model,
         messages,
         onDelta
       ),
   },
   cerebras: {
     label: "Cerebras",
-    model: "llama-3.3-70b",
+    fallbackModel: "llama-3.3-70b",
     needsKey: true,
     note: 'Free key (no credit card) at <a href="https://cloud.cerebras.ai" target="_blank" rel="noopener">cloud.cerebras.ai</a>.',
-    stream: (messages, apiKey, onDelta) =>
-      openAiCompatibleStream("https://api.cerebras.ai/v1/chat/completions", apiKey, "llama-3.3-70b", messages, onDelta),
+    discoverModel: async (apiKey) => {
+      const ids = await fetchModelIds("https://api.cerebras.ai/v1/models", apiKey);
+      return pickModel(ids, ["llama-3.3-70b", "llama-3.1-70b", "llama"], "llama-3.3-70b");
+    },
+    stream: (messages, apiKey, model, onDelta) =>
+      openAiCompatibleStream("https://api.cerebras.ai/v1/chat/completions", apiKey, model, messages, onDelta),
   },
   mistral: {
     label: "Mistral",
-    model: "mistral-small-latest",
+    fallbackModel: "mistral-small-latest",
     needsKey: true,
     note: 'Free key at <a href="https://console.mistral.ai" target="_blank" rel="noopener">console.mistral.ai</a> (phone verification required).',
-    stream: (messages, apiKey, onDelta) =>
-      openAiCompatibleStream("https://api.mistral.ai/v1/chat/completions", apiKey, "mistral-small-latest", messages, onDelta),
+    discoverModel: async (apiKey) => {
+      const ids = await fetchModelIds("https://api.mistral.ai/v1/models", apiKey);
+      return pickModel(ids, ["mistral-small-latest", "small-latest", "mistral-small"], "mistral-small-latest");
+    },
+    stream: (messages, apiKey, model, onDelta) =>
+      openAiCompatibleStream("https://api.mistral.ai/v1/chat/completions", apiKey, model, messages, onDelta),
   },
 };
+
