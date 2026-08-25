@@ -513,8 +513,8 @@
     <div class="table-wrap">
       <table>
         <tr><th></th><th>Typical AI coding assistant</th><th>Wrexlyn</th></tr>
-        <tr><td class="strong">You state a formatting preference</td><td>Applies this turn, forgotten next session</td><td class="yes">Saved via <code>remember_preference</code>, applied from now on &mdash; project or global scope</td></tr>
-        <tr><td class="strong">It finishes a multi-step pattern</td><td>Re-derives it from scratch next time</td><td class="yes"><code>save_skill</code> persists it; <code>recall_skill</code> brings it back on demand</td></tr>
+        <tr><td class="strong">You state a formatting preference</td><td>Applies this turn, forgotten next session</td><td class="yes">Persisted by a dedicated memory tool, applied from now on &mdash; project or global scope</td></tr>
+        <tr><td class="strong">It finishes a multi-step pattern</td><td>Re-derives it from scratch next time</td><td class="yes">A dedicated skill-saving tool persists it and brings it back on demand</td></tr>
         <tr><td class="strong">Preference takes effect</td><td>Next session, if at all</td><td class="yes">Immediately &mdash; the system prompt rebuilds mid-session</td></tr>
       </table>
     </div>
