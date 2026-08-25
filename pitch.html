@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wrexlyn — Pitch</title>
+<link rel="icon" href="icon-512.png" />
+<style>
+  :root {
+    --bg: #0a0d0f; --surface: #12171a; --surface-2: #171e22; --line: #23302f; --line-soft: #1a2224;
+    --ink: #e9edea; --ink-dim: #9db0aa; --ink-faint: #62746f;
+    --accent: #33e0a8; --accent-dim: rgba(51, 224, 168, 0.14); --accent-2: #6fa3ff;
+    --warn: #f2b854; --danger: #ff6e63;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --radius: 3px;
+  }
+  :root[data-theme="light"] {
+    --bg: #f5f6f4; --surface: #ffffff; --surface-2: #eef1ef; --line: #d7ddda; --line-soft: #e3e7e4;
+    --ink: #131a18; --ink-dim: #4d5c58; --ink-faint: #8a9a95;
+    --accent: #0d9a70; --accent-dim: rgba(13, 154, 112, 0.1); --accent-2: #2461d6; --warn: #b3701a; --danger: #c53d31;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f5f6f4; --surface: #ffffff; --surface-2: #eef1ef; --line: #d7ddda; --line-soft: #e3e7e4;
+      --ink: #131a18; --ink-dim: #4d5c58; --ink-faint: #8a9a95;
+      --accent: #0d9a70; --accent-dim: rgba(13, 154, 112, 0.1); --accent-2: #2461d6; --warn: #b3701a; --danger: #c53d31;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); }
+  body { font-size: 16px; line-height: 1.6; }
+  a { color: var(--accent-2); }
+  h1, h2, h3 { font-family: var(--mono); font-weight: 600; text-wrap: balance; letter-spacing: -0.01em; margin: 0; }
+  code.inline { background: var(--surface-2); border: 1px solid var(--line-soft); padding: 1px 6px; border-radius: 3px; font-size: 0.88em; color: var(--accent); font-family: var(--mono); }
+
+  .topbar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; padding: 14px 32px; border-bottom: 1px solid var(--line-soft); background: rgba(10, 13, 15, 0.85); backdrop-filter: blur(6px); }
+  .topbar .mark { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-weight: 700; font-size: 14px; }
+  .topbar .mark .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+  .topbar .mark .byline { font-weight: 400; font-size: 12px; color: var(--ink-dim); margin-left: 2px; }
+  .topbar nav { display: flex; gap: 18px; font-family: var(--mono); font-size: 12.5px; }
+  .topbar nav a { color: var(--ink-dim); }
+  .topbar nav a.current { color: var(--accent); }
+  .dl-btn { font-family: var(--mono); font-size: 12.5px; color: var(--bg); background: var(--accent); padding: 7px 14px; border-radius: var(--radius); text-decoration: none; }
+
+  .deck { max-width: 980px; margin: 0 auto; }
+  .slide { padding: 90px 32px; border-bottom: 1px solid var(--line-soft); }
+  .slide:last-child { border-bottom: none; }
+  .slide-num { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); letter-spacing: 0.08em; margin-bottom: 18px; }
+
+  .hero-slide { min-height: 78vh; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
+  .hero-slide h1 { font-size: 56px; letter-spacing: 0.02em; }
+  .hero-slide .sub { font-size: 19px; color: var(--ink-dim); max-width: 620px; margin-top: 16px; }
+  .hero-kicker { font-family: var(--mono); color: var(--accent); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 18px; }
+  .proof-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; width: 100%; max-width: 860px; margin-top: 38px; background: var(--line-soft); border: 1px solid var(--line-soft); }
+  .proof { background: var(--surface); padding: 15px; }
+  .proof strong { display: block; color: var(--accent); font-family: var(--mono); font-size: 17px; }
+  .proof span { display: block; color: var(--ink-faint); font-size: 11px; margin-top: 3px; }
+
+  .slide h2 { font-size: 32px; max-width: 800px; margin-bottom: 22px; }
+  .slide .body { max-width: 720px; }
+  .slide .body p { color: var(--ink-dim); font-size: 16.5px; margin: 0 0 14px; }
+  .slide .body ul { padding: 0; margin: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .slide .body li { font-size: 16px; color: var(--ink-dim); padding-left: 20px; position: relative; }
+  .slide .body li::before { content: "—"; position: absolute; left: 0; color: var(--accent); }
+  .slide .body li.sub { padding-left: 40px; font-size: 14.5px; }
+  .slide .body li strong { color: var(--ink); }
+
+  .shot { margin-top: 28px; border: 1px solid var(--line-soft); border-radius: var(--radius); overflow: hidden; background: var(--surface); max-width: 860px; }
+  .shot img { display: block; width: 100%; height: auto; }
+  .shot figcaption { font-family: var(--mono); font-size: 12px; color: var(--ink-dim); padding: 10px 14px; border-top: 1px solid var(--line-soft); }
+  .phone-slide .shot { width: min(100%, 390px); margin: 26px auto 0; }
+  .phone-slide .shot img { width: auto; max-width: 100%; height: min(62vh, 620px); margin: auto; object-fit: contain; background: var(--surface); }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 860px; }
+  @media (max-width: 700px) { .cols { grid-template-columns: 1fr; } }
+  .col-step { display: flex; gap: 12px; margin-bottom: 16px; }
+  .col-step .n { font-family: var(--mono); color: var(--accent); font-size: 13px; flex-shrink: 0; width: 20px; }
+  .col-step p { margin: 0; font-size: 14.5px; color: var(--ink-dim); }
+  .col-step p strong { color: var(--ink); }
+
+  .table-wrap { overflow-x: auto; max-width: 900px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line-soft); white-space: normal; }
+  th { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); font-weight: 500; }
+  td { color: var(--ink-dim); }
+  td.strong { color: var(--ink); font-family: var(--mono); }
+  td.yes { color: var(--accent); }
+  .pill { font-family: var(--mono); font-size: 11px; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); background: var(--accent-dim); }
+
+  .closing { min-height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 24px; }
+  .closing h2 { font-size: 34px; max-width: 700px; line-height: 1.3; }
+  .closing .actions { display: flex; gap: 14px; }
+  .btn { font-family: var(--mono); font-size: 13.5px; padding: 11px 20px; border-radius: var(--radius); text-decoration: none; }
+  .btn-primary { background: var(--accent); color: var(--bg); }
+  .btn-secondary { border: 1px solid var(--line); color: var(--ink-dim); }
+  img, video, canvas, svg { max-width: 100%; height: auto; }
+  pre { max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .slide, .body, .cols > *, .col-step p { min-width: 0; overflow-wrap: anywhere; }
+
+  @media (max-width: 760px) {
+    html { scroll-padding-top: 112px; }
+    body { overflow-x: hidden; }
+    .topbar { padding: 10px 14px; gap: 9px; flex-wrap: wrap; align-items: center; }
+    .topbar .mark { font-size: 13px; flex: 1 1 auto; }
+    .topbar .mark .byline { display: none; }
+    .topbar nav { order: 3; width: 100%; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-top: 2px; }
+    .topbar nav::-webkit-scrollbar { display: none; }
+    .topbar nav a { flex: 0 0 auto; border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; text-decoration: none; font-size: 11px; }
+    .topbar nav a.current { border-color: var(--accent); }
+    .dl-btn { flex: 0 0 auto; padding: 7px 10px; font-size: 11px; }
+    .deck { width: 100%; max-width: none; }
+    .slide { padding: 52px 20px; }
+    .hero-slide { min-height: auto; padding-top: 68px; padding-bottom: 68px; }
+    .hero-slide h1 { font-size: clamp(37px, 13vw, 54px); line-height: 1.05; overflow-wrap: anywhere; }
+    .hero-slide .sub { font-size: 16px; line-height: 1.55; }
+    .proof-strip { grid-template-columns: 1fr 1fr; }
+    .slide h2 { font-size: clamp(24px, 8vw, 32px); line-height: 1.15; overflow-wrap: anywhere; }
+    .slide .body p { font-size: 15px; }
+    .cols { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    .col-step { gap: 8px; }
+    .table-wrap { max-width: calc(100vw - 40px); overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--line-soft); }
+    table { min-width: 680px; font-size: 12px; }
+    th, td { padding: 8px 10px; }
+    .shot { max-width: 100%; overflow: hidden; }
+    .shot img { width: 100%; height: auto; display: block; }
+    .phone-slide .shot { width: min(100%, 340px); }
+    .phone-slide .shot img { width: auto; height: min(66vh, 540px); }
+    .closing { min-height: auto; padding-top: 80px; padding-bottom: 80px; }
+    .closing h2 { font-size: 27px; }
+    .closing .actions { flex-direction: column; width: 100%; }
+    .closing .actions .btn { width: 100%; text-align: center; }
+  }
+  @media (max-width: 420px) {
+    .slide { padding-left: 15px; padding-right: 15px; }
+    .table-wrap { max-width: calc(100vw - 30px); }
+    .dl-btn { font-size: 0; }
+    .dl-btn::after { content: "PPTX ↓"; font-size: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="mark"><span class="dot"></span>WREXLYN<span class="byline">by Nishant Prabhakar</span></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="demo.html">Demo</a>
+    <a href="documentation.html">Documentation</a>
+    <a href="pitch.html" class="current">Pitch deck</a>
+  </nav>
+  <a class="dl-btn" href="assets/Wrexlyn-Pitch-Deck.pptx" download>Download .pptx &#8595;</a>
+</div>
+
+<div class="deck">
+
+  <section class="slide hero-slide">
+    <div class="slide-num">01 / 21</div>
+    <div class="hero-kicker">The model-independent execution layer</div>
+    <h1>WREXLYN</h1>
+    <p class="sub">Turn any compatible LLM into a governed software delivery system that can understand a repository, act safely, prove its work and recover when it fails.</p>
+    <div class="proof-strip">
+      <div class="proof"><strong>6 states</strong><span>objective verification outcomes</span></div>
+      <div class="proof"><strong>Best-of-N</strong><span>isolated Git worktree candidates</span></div>
+      <div class="proof"><strong>Any model</strong><span>hosted endpoint or fully local</span></div>
+      <div class="proof"><strong>Local-first</strong><span>code, evidence and controls stay with you</span></div>
+    </div>
+    <p class="sub" style="font-size: 15px; margin-top: 28px; color: var(--ink-faint);">Created by Nishant Prabhakar</p>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">02 / 21</div>
+    <h2>Code generation is abundant. Trustworthy delivery is not.</h2>
+    <div class="body">
+      <ul>
+        <li><strong>Generation is no longer the bottleneck.</strong> Teams lose time validating patches, undoing regressions, reconstructing context and policing tool access.</li>
+        <li><strong>Model lock-in compounds cost.</strong> Most agent products fuse the workflow to one model, one cloud and one commercial roadmap.</li>
+        <li><strong>Autonomy without evidence creates hidden work.</strong> A fluent answer is not a passing build, a safe mutation or a recoverable change.</li>
+        <li class="sub"><strong>Wrexlyn productizes the missing layer:</strong> governed execution, deterministic verification, evidence and recovery around whichever model the customer chooses.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">03 / 21</div>
+    <h2>One control plane from intent to verified outcome</h2>
+    <p class="dim">Wrexlyn owns the execution chain above the model: context acquisition, governed action, objective checks, failure recovery and evidence-grade delivery.</p>
+    <div class="body">
+      <ul>
+        <li><strong>Understand:</strong> ranked code search, symbols, repository structure and Git history ground the task before edits begin.</li>
+        <li><strong>Control:</strong> every mutation is classified, permission-gated and protected by binary-safe checkpoints.</li>
+        <li><strong>Prove:</strong> project-native tests, builds and deterministic artifact checks outrank the model's narrative confidence.</li>
+        <li><strong>Recover:</strong> independent critique, bounded repair, NCP diagnosis and isolated Best-of-N attempts turn failure into a controlled workflow.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">03A / 21</div>
+    <h2>Thirteen completed phases create one defensible execution layer</h2>
+    <div class="cols">
+      <div>
+        <div class="col-step"><span class="n">01</span><p><strong>Security foundation</strong> &mdash; local auth, secret storage, SSRF protection, path controls and isolated shell execution</p></div>
+        <div class="col-step"><span class="n">03</span><p><strong>Verification states</strong> &mdash; verified, warning, unverified, failed, blocked or not applicable</p></div>
+        <div class="col-step"><span class="n">04</span><p><strong>Reversible checkpoints</strong> &mdash; binary-safe workspace capture with staleness protection</p></div>
+        <div class="col-step"><span class="n">05</span><p><strong>Project intelligence</strong> &mdash; ranked search, symbol index and Git-history signal</p></div>
+        <div class="col-step"><span class="n">06</span><p><strong>Evidence consistency</strong> &mdash; source citations and contradiction detection across deliverables</p></div>
+      </div>
+      <div>
+        <div class="col-step"><span class="n">07</span><p><strong>Artifact engine</strong> &mdash; structured, editable and flowing business outputs</p></div>
+        <div class="col-step"><span class="n">08</span><p><strong>Skills platform</strong> &mdash; versioned expertise with declared, previewed permissions</p></div>
+        <div class="col-step"><span class="n">09</span><p><strong>MCP connectors</strong> &mdash; stdio and Streamable HTTP, OAuth 2.1 and per-server policy</p></div>
+        <div class="col-step"><span class="n">10</span><p><strong>Parallel agents</strong> &mdash; real Git worktrees, candidate verification and winner selection</p></div>
+        <div class="col-step"><span class="n">11</span><p><strong>Product UX</strong> &mdash; an evidence-first execution console across desktop, CLI and LAN mobile</p></div>
+        <div class="col-step"><span class="n">12</span><p><strong>Local enterprise governance</strong> &mdash; customer-controlled policy, evidence and custody without a mandatory Wrexlyn cloud</p></div>
+        <div class="col-step"><span class="n">13</span><p><strong>Product evaluation</strong> &mdash; reproducible, model-pinned measurement of success, safety, recovery and economics</p></div>
+      </div>
+    </div>
+    <p class="dim"><strong>Phase 12 is local by design.</strong> Wrexlyn did not compromise its trust architecture to imitate multi-tenant SaaS. Enterprise control lives with the customer; hosted models remain optional infrastructure.</p>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">03B / 21</div>
+    <h2>Sell verified engineering capacity, not another AI seat</h2>
+    <div class="cols">
+      <div>
+        <h3 class="accent">What engineering leaders buy</h3>
+        <div class="col-step"><span class="n">01</span><p><strong>Less review debt</strong> &mdash; every completion arrives with the checks run, the outcome state and the evidence behind it</p></div>
+        <div class="col-step"><span class="n">02</span><p><strong>Lower model dependency</strong> &mdash; route work across frontier, low-cost, private and local models without replacing the control plane</p></div>
+        <div class="col-step"><span class="n">03</span><p><strong>Safer delegation</strong> &mdash; permission gates, checkpoints and rollback reduce the blast radius of agentic execution</p></div>
+      </div>
+      <div>
+        <h3 class="accent">What a pilot must measure</h3>
+        <div class="col-step"><span class="n">A</span><p><strong>Accepted-task rate</strong> &mdash; completed tasks merged without material human rework</p></div>
+        <div class="col-step"><span class="n">B</span><p><strong>Review minutes saved</strong> &mdash; baseline versus evidence-backed Wrexlyn delivery</p></div>
+        <div class="col-step"><span class="n">C</span><p><strong>Cost per verified outcome</strong> &mdash; model, token, latency and repair cost measured per successful task</p></div>
+      </div>
+    </div>
+    <p class="dim">The commercial promise is testable: ship more accepted work per engineering hour while preserving customer control over code, models and evidence. No productivity percentage is claimed until a customer pilot establishes it.</p>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">03C / 21</div>
+    <h2>Technical capability mapped to the benchmarks buyers recognize</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Industry benchmark</th><th>What it measures</th><th>Wrexlyn capability under test</th><th>Commercial meaning</th></tr>
+        <tr><td class="strong">SWE-bench Verified</td><td>Resolution of 500 human-validated, real GitHub issues inside reproducible repository environments</td><td class="yes">Project indexing, symbol search, multi-file editing, project-native tests, six-state outcomes, bounded repair and rollback</td><td>Can it turn an issue into a correct patch, rather than merely propose code?</td></tr>
+        <tr><td class="strong">Terminal-Bench 2.0</td><td>89 hard, realistic, end-to-end tasks performed through a terminal environment</td><td class="yes">Separated shell service, risk policy, command preview, checkpoints, long-horizon plans and Best-of-N worktrees</td><td>Can it operate a real development environment safely and finish multi-step work?</td></tr>
+        <tr><td class="strong">BFCL V4</td><td>Single-turn, parallel and multi-turn function calling, relevance detection and agentic tool use</td><td class="yes">Typed tool schemas, parallel read operations, permission-gated mutations, MCP tools and rejection of unavailable or unsafe actions</td><td>Does it call the right tool with the right arguments, and know when not to call one?</td></tr>
+        <tr><td class="strong">SWE-Lancer</td><td>More than 1,400 real freelance engineering tasks with approximately $1 million of historical economic value</td><td class="yes">End-to-end feature work, repository modification, verification evidence, professional artifacts and auditable delivery</td><td>Can it complete work customers have demonstrably paid engineers to perform?</td></tr>
+      </table>
+    </div>
+    <p class="dim">These are the correct external scoreboards for Wrexlyn. Architectural coverage is implemented; leaderboard performance must be published only after reproducible, model-pinned runs. Sources: <a href="https://openai.com/index/introducing-swe-bench-verified/" target="_blank" rel="noopener">SWE-bench Verified</a>, <a href="https://github.com/harbor-framework/terminal-bench-2" target="_blank" rel="noopener">Terminal-Bench 2</a>, <a href="https://gorilla.cs.berkeley.edu/leaderboard" target="_blank" rel="noopener">BFCL</a>, <a href="https://swelancer.github.io/leaderboard/" target="_blank" rel="noopener">SWE-Lancer</a>.</p>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">03D / 21</div>
+    <h2>Wrexlyn is engineered for harness-level performance</h2>
+    <div class="cols">
+      <div>
+        <div class="col-step"><span class="n">A</span><p><strong>Better context acquisition</strong> &mdash; lexical ranking, symbols and Git history reduce blind file exploration and wasted tokens</p></div>
+        <div class="col-step"><span class="n">B</span><p><strong>Safer state mutation</strong> &mdash; risk classification, explicit permission and binary-safe checkpoints protect the working tree</p></div>
+        <div class="col-step"><span class="n">C</span><p><strong>Objective completion</strong> &mdash; configured tests and build checks outrank the model's narrative confidence</p></div>
+        <div class="col-step"><span class="n">D</span><p><strong>Failure recovery</strong> &mdash; bounded repair, independent critique and stuck-loop detection convert failures into structured next actions</p></div>
+      </div>
+      <div>
+        <div class="col-step"><span class="n">E</span><p><strong>Candidate diversity</strong> &mdash; Best-of-N agents solve in isolated worktrees instead of corrupting one shared attempt</p></div>
+        <div class="col-step"><span class="n">F</span><p><strong>Model portability</strong> &mdash; benchmark the same harness across integrated, custom-hosted and local models</p></div>
+        <div class="col-step"><span class="n">G</span><p><strong>Tool portability</strong> &mdash; stdio and authenticated remote MCP expand the action space without bypassing policy</p></div>
+        <div class="col-step"><span class="n">H</span><p><strong>Evidence-grade delivery</strong> &mdash; every result carries checks, citations, confidence, transaction history and rollback state</p></div>
+      </div>
+    </div>
+    <p class="dim"><strong>The technical thesis:</strong> frontier models are temporary advantages. A model-independent execution harness that improves context, controls actions, verifies outcomes and learns from failure is the durable product layer.</p>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">03E / 21</div>
+    <h2>The benchmark standard Wrexlyn should publish</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Metric</th><th>Minimum credible disclosure</th><th>Why buyers care</th></tr>
+        <tr><td class="strong">Task success</td><td>Resolved percentage and pass@1 on the official unmodified test harness</td><td>Measures actual delivery, not subjective answer quality</td></tr>
+        <tr><td class="strong">Verification precision</td><td>How often &ldquo;verified&rdquo; corresponds to a genuinely passing external grader</td><td>Tests whether confidence and evidence can be trusted</td></tr>
+        <tr><td class="strong">Regression rate</td><td>Previously passing tests broken per completed task</td><td>Separates narrow patches from production-safe changes</td></tr>
+        <tr><td class="strong">Safety rate</td><td>Unsafe actions proposed, blocked, approved and executed</td><td>Quantifies operational control rather than claiming it</td></tr>
+        <tr><td class="strong">Recovery uplift</td><td>Success after first failure: single-agent repair versus critic and Best-of-N modes</td><td>Proves whether Wrexlyn's proprietary orchestration adds value over the base model</td></tr>
+        <tr><td class="strong">Economics</td><td>Median tokens, wall time and model cost per successful task</td><td>Lets teams compare total cost of verified work</td></tr>
+        <tr><td class="strong">Reproducibility</td><td>Model/version, endpoint, seed where available, container image, commit SHA and full traces</td><td>Makes the score auditable and acquisition-grade</td></tr>
+      </table>
+    </div>
+    <p class="dim">Publish the scorecard by model tier: frontier hosted, low-cost hosted and local/open-weight. That demonstrates the value of Wrexlyn itself instead of confusing harness performance with model performance.</p>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">03F / 21</div>
+    <h2>Peer score: 81/100 &mdash; top-tier architecture, proof gap remaining</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Product</th><th>Weighted score</th><th>What drives the result</th></tr>
+        <tr><td class="strong">OpenAI Codex</td><td>84</td><td>Execution strength, sandboxing, parallel workflows and external proof</td></tr>
+        <tr><td class="strong">Cursor</td><td>82</td><td>Best integrated IDE, context and remote-agent workflow</td></tr>
+        <tr><td class="strong">Wrexlyn</td><td class="yes">81</td><td>Model freedom, verification, rollback, evidence and professional artifacts; external score not yet published</td></tr>
+        <tr><td class="strong">GitHub Copilot agents</td><td>80</td><td>Distribution, GitHub workflow, hooks, custom agents and enterprise ecosystem</td></tr>
+        <tr><td class="strong">Claude Code</td><td>78</td><td>Excellent coding agent, permissions, hooks and MCP; less model portability</td></tr>
+        <tr><td class="strong">Aider</td><td>62</td><td>Efficient and model-portable, with a narrower governance and orchestration layer</td></tr>
+      </table>
+    </div>
+    <p class="dim">Weighted analyst assessment, not measured task accuracy: execution 20%; verification 15%; safety 10%; context 10%; model portability 10%; extensibility 10%; parallel isolation 10%; artifacts 5%; UX/enterprise 5%; external proof 5%.</p>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">03G / 21</div>
+    <h2>Where Wrexlyn wins &mdash; and what must be proven next</h2>
+    <div class="cols">
+      <div>
+        <h3 class="accent">Technical advantages</h3>
+        <ul>
+          <li>Integrated, custom-hosted and fully local model deployment</li>
+          <li>Six-state outcome model with deterministic checks and independent critique</li>
+          <li>Binary-safe rollback with Git checkpoints and stale-write protection</li>
+          <li>Evidence citations and cross-artifact consistency</li>
+          <li>Native business artifacts beyond source code</li>
+          <li>Best-of-N candidates isolated in real Git worktrees</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="accent">Proof required for leadership</h3>
+        <ul>
+          <li>Official SWE-bench Verified and Terminal-Bench 2 results</li>
+          <li>Same-model ablation proving orchestration uplift</li>
+          <li>Cost, latency and regression-rate disclosure</li>
+          <li>Large-repository and production case studies</li>
+          <li>Enterprise policy, SSO/RBAC and audit administration</li>
+          <li>Independent replication of published traces and scores</li>
+        </ul>
+      </div>
+    </div>
+    <p class="dim">The honest conclusion: Wrexlyn is already differentiated enough to benchmark seriously. It is not yet entitled to call itself a leaderboard leader.</p>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">04 / 21</div>
+    <h2>Four categories answer "write my code" &mdash; one trade-off differs</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Category</th><th>Optimizes for</th><th>Gives up</th><th>Where Wrexlyn sits</th></tr>
+        <tr><td class="strong">Inline autocomplete</td><td>Speed of one suggestion, in-editor</td><td>No multi-file planning, no verification loop</td><td class="yes">A full agent loop &mdash; a different tier of task, not a faster version of the same one</td></tr>
+        <tr><td class="strong">IDE-embedded agents</td><td>Convenience &mdash; one tool, one editor</td><td>Usually a fixed model, subscription regardless of free tiers upstream</td><td class="yes">Editor-agnostic: integrated providers, any compatible URL, or a fully local model</td></tr>
+        <tr><td class="strong">Hosted autonomous SaaS agents</td><td>Fire-and-forget delegation</td><td>Code and prompts leave your machine; verification you can't inspect</td><td class="yes">One local Node process &mdash; every risk-gate, checkpoint and verification result remains under the customer's control</td></tr>
+        <tr><td class="strong">Other local/terminal agents</td><td>Also local, also model-agnostic &mdash; the real comparison</td><td>Typically no independent critique, no formalized confidence score</td><td class="yes">Independent critic, document quality gate, and the Nishant Convergence Protocol &mdash; specific, checkable differences</td></tr>
+      </table>
+    </div>
+    <p class="dim" style="margin-top: 20px;">The honest pitch is narrower than &ldquo;better at everything&rdquo;: the bet is that verified reliability compounds where raw generation speed doesn't &mdash; especially once free models, not the frontier ones, are doing the generating.</p>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">05 / 21</div>
+    <h2>The product</h2>
+    <div class="cols">
+      <div>
+        <div class="col-step"><span class="n">1</span><p><strong>Execution console</strong> &mdash; sessions, plans, tool activity, permissions and outcomes in one workspace</p></div>
+        <div class="col-step"><span class="n">2</span><p><strong>Project intelligence</strong> &mdash; lexical search, symbols, structure and Git history ground every task</p></div>
+        <div class="col-step"><span class="n">3</span><p><strong>Verified delivery</strong> &mdash; checks, critic, evidence, confidence and safe rollback are built into the runtime</p></div>
+      </div>
+      <div>
+        <div class="col-step"><span class="n">4</span><p><strong>Professional outputs</strong> &mdash; code, Office files, Markdown, HTML and PDF with deterministic quality controls</p></div>
+        <div class="col-step"><span class="n">5</span><p><strong>Governed extensibility</strong> &mdash; packaged skills and local or remote MCP integrations with explicit permissions</p></div>
+        <div class="col-step"><span class="n">6</span><p><strong>Best-of-N execution</strong> &mdash; isolated candidate implementations, independently checked and ranked</p></div>
+      </div>
+    </div>
+    <figure class="shot"><img src="assets/screenshots/pitch-01.png" alt="" loading="lazy" decoding="async" /><figcaption>Desktop UI — project open, file tree, live model/provider status.</figcaption></figure>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">06 / 21</div>
+    <h2>How the V-Cycle runtime works</h2>
+    <div class="cols">
+      <div>
+        <div class="col-step"><span class="n">1</span><p><strong>Risk gate</strong> — every action scored low/med/high before it runs</p></div>
+        <div class="col-step"><span class="n">2</span><p><strong>Snapshot</strong> — every touched file captured before the change</p></div>
+        <div class="col-step"><span class="n">3</span><p><strong>Verification</strong> — real build/test/lint, never invented</p></div>
+      </div>
+      <div>
+        <div class="col-step"><span class="n">4</span><p><strong>Independent critic</strong> — a second model call reviews intent, not just success</p></div>
+        <div class="col-step"><span class="n">5</span><p><strong>Bounded repair</strong> — up to 3 rounds, with stuck-loop detection</p></div>
+        <div class="col-step"><span class="n">6</span><p><strong>Confidence score</strong> — 0–100, evidence-based, shown every turn</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">07 / 21</div>
+    <h2>What that looks like when something goes wrong</h2>
+    <figure class="shot"><img src="assets/screenshots/pitch-02.png" alt="" loading="lazy" decoding="async" /><figcaption>Verification failed, critic independently flagged the real gap, one-click revert.</figcaption></figure>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">08 / 21</div>
+    <h2>High-risk actions get a harder gate</h2>
+    <figure class="shot"><img src="assets/screenshots/pitch-03.png" alt="" loading="lazy" decoding="async" /><figcaption>No "always allow" exists for this tier — by design, not a missing feature.</figcaption></figure>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">09 / 21</div>
+    <h2>The Nishant Convergence Protocol</h2>
+    <div class="body">
+      <p>A weak or free model is rarely bad at a <em>first</em> attempt. It's bad at self-correcting when that attempt fails &mdash; a generic &ldquo;try again&rdquo; gets a near-identical repeat, or a thrash to something unrelated. NCP targets exactly that moment.</p>
+    </div>
+    <div class="cols">
+      <div>
+        <div class="col-step"><span class="n">1</span><p><strong>Divergent diagnosis</strong> &mdash; once a plain repair attempt has already failed, two independently-framed root-cause diagnoses run in parallel from the same failure evidence.</p></div>
+        <div class="col-step"><span class="n">2</span><p><strong>Pairwise adjudication</strong> &mdash; a dedicated call judges the two diagnoses against each other, not in isolation &mdash; measurably more reliable than either self-scoring.</p></div>
+      </div>
+      <div>
+        <div class="col-step"><span class="n">3</span><p><strong>Lesson-steered</strong> &mdash; the project's learned lessons are ranked by relevance and foregrounded directly in both diagnosis prompts, not left as passive context.</p></div>
+        <div class="col-step"><span class="n">4</span><p><strong>Formalized score</strong> &mdash; repair rounds used, adjudication margin, and any lesson recurrence combine into one reproducible confidence number.</p></div>
+      </div>
+    </div>
+    <p class="dim" style="margin-top: 20px;">Honest scope: this closes the <em>reliability</em> gap on checkable tasks &mdash; code, documents &mdash; not raw reasoning capability. And it's adaptive: the ensemble only runs once a first attempt has already failed, so it costs nothing extra on the common case.</p>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">10 / 21</div>
+    <h2>How this differs</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th></th><th>Typical AI coding assistant</th><th>Hosted SaaS agent</th><th>Wrexlyn</th></tr>
+        <tr><td class="strong">Where code lives</td><td>Your machine</td><td>Their servers</td><td class="yes">Your machine</td></tr>
+        <tr><td class="strong">Verifies its own output</td><td>No</td><td>Sometimes</td><td class="yes">Every mutating turn</td></tr>
+        <tr><td class="strong">Independent critique step</td><td>No</td><td>No</td><td class="yes">Yes</td></tr>
+        <tr><td class="strong">When a fix fails once</td><td>Blind retry</td><td>Blind retry</td><td class="yes">Adjudicated dual diagnosis (NCP)</td></tr>
+        <tr><td class="strong">Model choice</td><td>Fixed</td><td>Fixed</td><td class="yes">Integrated providers, custom URL, or local model</td></tr>
+        <tr><td class="strong">Confidence scoring</td><td>No — always sounds equally sure</td><td>No</td><td class="yes">0&ndash;100, evidence-based, every turn</td></tr>
+        <tr><td class="strong">Learns your preferences</td><td>No &mdash; resets every session</td><td>No</td><td class="yes">Remembers preferences &amp; past mistakes</td></tr>
+        <tr><td class="strong">Cost to run</td><td>Subscription</td><td>Subscription/usage</td><td class="yes">Free-tier eligible</td></tr>
+        <tr><td class="strong">Repository intelligence</td><td>Editor context and search</td><td>Platform-dependent indexing</td><td class="yes">Lexical rank + symbol index + Git-history signal</td></tr>
+        <tr><td class="strong">Rollback integrity</td><td>Usually editor or Git undo</td><td>Platform-managed</td><td class="yes">Binary-safe snapshots + Git tree checkpoints + stale-write protection</td></tr>
+        <tr><td class="strong">Parallel candidates</td><td>Multiple chats or manual branches</td><td>Varies</td><td class="yes">Real isolated worktrees, verification and winner selection</td></tr>
+        <tr><td class="strong">External tool governance</td><td>Extension-dependent</td><td>Platform policy</td><td class="yes">MCP stdio/HTTP, OAuth 2.1, per-server permissions and anti-injection framing</td></tr>
+        <tr><td class="strong">Evidence package</td><td>Chat transcript and diff</td><td>Platform-dependent logs</td><td class="yes">Checks, citations, outcome state, confidence, transaction log and rollback record</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">11 / 21</div>
+    <h2>Real document generation, not write_file in a costume</h2>
+    <div class="body">
+      <ul>
+        <li><strong>Word</strong> — real formatting, images sized from real aspect ratio, genuine auto-updating table of contents.</li>
+        <li><strong>PowerPoint</strong> — this deck. Section/two-column layouts, no decorative accent-stripe cliché.</li>
+        <li><strong>Excel</strong> — live recalculating formulas, currency/percent/date number formats, not baked-in numbers.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">12 / 21</div>
+    <h2>A quality gate the model can't talk its way past</h2>
+    <div class="body">
+      <p class="dim">Every document a model writes is a claim about its own work. Wrexlyn doesn't take that claim on faith — it checks the file that actually landed on disk.</p>
+      <ul>
+        <li><strong>Deterministic, not another LLM guess</strong> — leftover placeholder text (<code>TODO</code>, <code>lorem ipsum</code>, <code>[insert&hellip;</code>), jagged tables where a row doesn't match its header, a table or sheet with headers but zero data rows: all caught by plain code, not a second model call that could be just as wrong as the first.</li>
+        <li><strong>Fails closed, then the model fixes it &mdash; same turn</strong> — a blocked check returns a specific reason, the model reads it and retries immediately. No silent shipping of a half-finished table.</li>
+        <li><strong>Confidence scores stop lying</strong> — a document-only turn used to be capped at 60% confidence no matter how clean the output was, because nothing had verified it. Now a turn that passes its quality gate is scored as genuinely verified, not just unchecked-and-hopeful.</li>
+      </ul>
+      <p class="dim">This is real irrespective of which integrated, custom or local model generated the file &mdash; a weak model's placeholder text or empty section gets caught every time. It can't upgrade a weak model's prose to a strong model's; no checker can. What it does is stop bad structure from ever reaching you.</p>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">13 / 21</div>
+    <h2>It remembers what you tell it &mdash; and what it got wrong</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th></th><th>Typical AI coding assistant</th><th>Wrexlyn</th></tr>
+        <tr><td class="strong">You state a formatting preference</td><td>Applies this turn, forgotten next session</td><td class="yes">Saved via <code>remember_preference</code>, applied from now on &mdash; project or global scope</td></tr>
+        <tr><td class="strong">It finishes a multi-step pattern</td><td>Re-derives it from scratch next time</td><td class="yes"><code>save_skill</code> persists it; <code>recall_skill</code> brings it back on demand</td></tr>
+        <tr><td class="strong">Preference takes effect</td><td>Next session, if at all</td><td class="yes">Immediately &mdash; the system prompt rebuilds mid-session</td></tr>
+      </table>
+    </div>
+    <p class="dim">No autonomous rewriting of Wrexlyn's own source. Lessons and preferences steer the next generation at the prompt level &mdash; fully visible, fully reversible. A real code bug still gets fixed the way any real bug does: reviewed, verified, shipped.</p>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">14 / 21</div>
+    <h2>Use our providers, your endpoint, or your own local model</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Provider</th><th>Key required</th><th>Notes</th></tr>
+        <tr><td class="strong">Pollinations</td><td><span class="pill">no key</span></td><td>Optional plain chat; anonymous tool execution unavailable</td></tr>
+        <tr><td class="strong">Groq</td><td><span class="pill">free key</span></td><td>Fast inference</td></tr>
+        <tr><td class="strong">OpenRouter</td><td><span class="pill">free key</span></td><td>":free"-tier models</td></tr>
+        <tr><td class="strong">Google Gemini</td><td><span class="pill">free key</span></td><td>No credit card</td></tr>
+        <tr><td class="strong">Cerebras</td><td><span class="pill">free key</span></td><td>1M tokens/day free</td></tr>
+        <tr><td class="strong">Mistral</td><td><span class="pill">free key</span></td><td>Phone verification</td></tr>
+        <tr><td class="strong">Custom hosted URL</td><td><span class="pill">optional key</span></td><td>Any OpenAI-compatible endpoint</td></tr>
+        <tr><td class="strong">Local model server</td><td><span class="pill">no cloud</span></td><td>Ollama, LM Studio, llama.cpp, vLLM and compatible runtimes</td></tr>
+      </table>
+    </div>
+    <p class="dim">The model is replaceable infrastructure. Wrexlyn supplies the durable value above it: project context, governed tools, checkpoints, verification, evidence and recoverability.</p>
+  </section>
+
+  <section class="slide phone-slide">
+    <div class="slide-num">15 / 21</div>
+    <h2>Access on desktop, terminal, or phone</h2>
+    <figure class="shot"><img src="assets/screenshots/pitch-04.png" alt="" loading="lazy" decoding="async" /><figcaption>Same session, phone-width viewport — QR code pairing from Settings, no separate app.</figcaption></figure>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">16 / 21</div>
+    <h2>Even the browser-only demo is honestly scoped</h2>
+    <figure class="shot"><img src="assets/screenshots/pitch-05.png" alt="" loading="lazy" decoding="async" /><figcaption>Static GitHub Pages build: Google Sign-In, bring-your-own key — no backend, no file/shell tools claimed.</figcaption></figure>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">17 / 21</div>
+    <h2>Also in the Wrexlyn portfolio: a private library of scoring algorithms</h2>
+    <p class="dim">Eight sectors. One shared discipline. Every score below came out of a real, runnable implementation — not a demo number.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Algorithm</th><th>Domain</th><th>Verified score</th></tr>
+        <tr><td class="strong">NDQI</td><td>Private equity</td><td>74.1 &mdash; Attractive</td></tr>
+        <tr><td class="strong">NSTS</td><td>Venture capital</td><td>75.3 &mdash; Strong</td></tr>
+        <tr><td class="strong">NESS</td><td>Public equities</td><td>72.3 &mdash; Attractive</td></tr>
+        <tr><td class="strong">NCRS</td><td>Corporate credit</td><td>70.0 &mdash; BB/B High Yield</td></tr>
+        <tr><td class="strong">NREIS</td><td>Real estate</td><td>77.4 &mdash; Core-plus</td></tr>
+        <tr><td class="strong">NAVS</td><td>Drug discovery</td><td>64.2 &mdash; Monitor</td></tr>
+        <tr><td class="strong">NIMRI</td><td>India macro</td><td>84.4 &mdash; Expansion</td></tr>
+        <tr><td class="strong">NLNES / NCH</td><td>Logistics</td><td>64.8 &mdash; Adequate</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">18 / 21</div>
+    <h2>Not eight one-off hacks &mdash; one shared discipline</h2>
+    <p class="dim">Named, versioned frameworks, not an analyst's gut-check that means something different depending on who's asking.</p>
+    <div class="body">
+      <ul>
+        <li>Most quantitative screening in these sectors runs on a judgment call translated into a number that means something different every time it's quoted. These eight replace that with named, versioned frameworks in the tradition of the Altman Z-Score and the Piotroski F-Score &mdash; the score means the same thing to anyone, this year or next.</li>
+        <li>Every pillar's weight reflects a stated view of what actually drives outcomes in that specific domain &mdash; entry price and financial trajectory dominate PE screening; clinical-stage probability of success dominates drug-pipeline triage; empty-mile ratio and cost-per-ton-km dominate logistics diagnostics. Eight sectors, eight deliberately different shapes &mdash; not one template stretched thin.</li>
+        <li class="sub"><strong>That's not a coincidence of formatting.</strong> A framework that scored every sector the same way would be evidence of a template, not real domain expertise.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">19 / 21</div>
+    <h2>Auditable, not a black box</h2>
+    <p class="dim">The differentiator isn't any single formula &mdash; it's that every claim is checkable.</p>
+    <div class="body">
+      <ul>
+        <li>Missing data degrades a confidence rating instead of being silently guessed &mdash; a score built from a clean financial model is flagged differently than one built from a two-page teaser deck, and the report says so.</li>
+        <li>Every algorithm ships with a runnable reference implementation, not just a description. The scores on the previous slide were generated by actually running that script against a real worked example &mdash; not hand-picked, not illustrative.</li>
+        <li class="sub"><strong>If a script and its methodology doc ever disagree, the doc wins and the script has a bug.</strong> That convention alone is rarer than it sounds in quantitative screening.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-num">20 / 21</div>
+    <h2>Documented like an asset, not a slide deck</h2>
+    <p class="dim">Trade secret protection today; the patent question addressed honestly, not oversold.</p>
+    <div class="body">
+      <ul>
+        <li>Each algorithm is specified precisely enough &mdash; named, versioned, formula-level &mdash; to be a serious IP conversation, not just a marketing claim. That specificity is what makes a trade-secret claim defensible in the first place.</li>
+        <li>Patent-eligibility for the scoring models themselves is a separate, harder question under the US <em>Alice/Mayo</em> framework for abstract methods. One algorithm in the set &mdash; a logistics consolidation heuristic &mdash; has a materially stronger patent-eligibility case, precisely because it's a concrete computational method with a measurable output, not just a scoring-weight scheme.</li>
+        <li class="sub"><strong>The full methodology is private, not published</strong> &mdash; available for review under NDA to qualified counterparties and protected as proprietary intellectual property.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide closing">
+    <div class="slide-num">21 / 21</div>
+    <h2>Built to be trusted with real work,<br />not just impressive in a demo.</h2>
+    <div class="actions">
+      <a class="btn btn-primary" href="assets/Wrexlyn-Pitch-Deck.pptx" download>Download the deck (.pptx)</a>
+      <a class="btn btn-secondary" href="product-demo.html">Explore the product tour</a>
+    </div>
+    <p class="sub" style="font-size: 13px; color: var(--ink-faint);">Wrexlyn &middot; &copy; 2026 Nishant Prabhakar</p>
+  </section>
+
+</div>
+
+</body>
+</html>
