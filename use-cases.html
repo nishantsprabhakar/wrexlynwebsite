@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Seven everyday jobs Wrexlyn does end to end — software engineering, business documents, research, automation, and more — explained in plain English.">
+  <meta name="author" content="Nishant Prabhakar">
+  <meta property="og:title" content="Wrexlyn — Use Cases">
+  <meta property="og:description" content="One AI teammate, seven everyday jobs done end to end.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Wrexlyn by Nishant Prabhakar">
+  <title>Wrexlyn — Use Cases</title>
+  <link rel="icon" href="icon-512.png">
+  <link rel="stylesheet" href="landing.css">
+  <style>
+    .ucHero{padding:70px 0 50px}
+    .ucHero .sectionTag{display:block;margin-bottom:18px}
+    .ucHero h1{font-size:clamp(42px,7vw,84px);line-height:.95;letter-spacing:-.045em;margin:0 0 22px;font-weight:900}
+    .ucHero h1 span{color:transparent;-webkit-text-stroke:1px var(--cyan)}
+    .ucHero>p{font-size:17px;line-height:1.7;color:var(--muted);max-width:640px}
+    .ucJump{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+    .ucJump a{border:1px solid var(--line);padding:10px 16px;font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:#c9d8d2;font-weight:600}
+    .ucJump a:hover{border-color:var(--cyan);color:var(--cyan)}
+
+    .uc{padding:64px 0;border-top:1px solid var(--line);scroll-margin-top:100px}
+    .ucHead{display:flex;align-items:flex-start;gap:22px;margin-bottom:28px}
+    .ucIcon{flex:0 0 auto;width:64px;height:64px;border-radius:50%;border:1px solid var(--cyan);background:rgba(99,247,194,.06);display:grid;place-items:center;font-size:28px}
+    .ucTitleWrap .sectionTag{display:block;margin-bottom:10px}
+    .uc h2{font-size:clamp(26px,3.4vw,38px);line-height:1.12;margin:0;font-weight:900;letter-spacing:-.02em}
+    .ucScenario{font-size:16px;font-style:italic;color:#9fe6c8;max-width:760px;margin:22px 0 0}
+    .ucBody{display:grid;grid-template-columns:1.3fr 1fr;gap:24px;margin-top:30px}
+    .ucCard{border:1px solid var(--line);background:var(--panel);padding:26px}
+    .ucCard .label{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;color:#6f817a;margin-bottom:18px;display:block}
+    .ucSteps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}
+    .ucSteps li{display:flex;gap:14px;font-size:14px;line-height:1.55;color:#c3d3cc}
+    .ucSteps li b{flex:0 0 auto;width:24px;height:24px;border-radius:50%;border:1px solid var(--cyan);color:var(--cyan);font-family:var(--font-mono);font-size:11px;display:grid;place-items:center;font-style:normal}
+    .ucExample{font-size:14.5px;line-height:1.65;color:#eef8f2}
+
+    .ucAudience{padding:110px 0;border-top:1px solid var(--line)}
+    .ucRecap{padding:110px 0;border-top:1px solid var(--line)}
+    .ucRecap .tableWrap table td:first-child{white-space:nowrap}
+    .ucRecap .emoji{font-size:18px;margin-right:10px}
+
+    @media (max-width: 760px) {
+      .ucBody{grid-template-columns:1fr}
+      .ucHead{gap:16px}
+      .ucIcon{width:52px;height:52px;font-size:22px}
+      .ucCard{padding:20px}
+      .uc{padding:48px 0}
+    }
+  </style>
+</head>
+<body>
+<div class="scroll-progress" aria-hidden="true"><i></i></div>
+<main id="top">
+  <div class="noise" aria-hidden="true"></div>
+  <nav class="nav shell" aria-label="Main navigation">
+    <a href="index.html#top" class="brand"><img class="brand-logo" src="icon-512.png" alt="Wrexlyn logo"><span>WREXLYN</span></a>
+    <div class="navlinks"><a href="index.html#platform">Platform</a><a href="index.html#moat">Moat</a><a href="use-cases.html" class="current">Use Cases</a><a href="product-demo.html">Product Tour</a><a href="index.html#compare">Compare</a><a href="verification-report.html">Verification</a><a href="documentation.html">Documentation</a><a href="pitch.html">Pitch</a></div>
+    <a class="navcta" href="demo.html">Launch demo <span>↗</span></a>
+  </nav>
+
+  <section class="ucHero shell">
+    <p class="sectionTag">SEVEN WAYS TO USE WREXLYN</p>
+    <h1>One teammate.<br><span>Every kind of work.</span></h1>
+    <p>Wrexlyn is one AI teammate you give plain-English instructions to. It plans the work, does it inside your own files and tools, checks its own result, and shows you the proof — across seven everyday jobs.</p>
+    <div class="ucJump">
+      <a href="#code">01 Software engineering</a>
+      <a href="#documents">02 Business documents</a>
+      <a href="#research">03 Research &amp; diligence</a>
+      <a href="#safety">04 Safe experimentation</a>
+      <a href="#automation">05 Automation</a>
+      <a href="#models">06 Model freedom</a>
+      <a href="#industry">07 Industry solutions</a>
+    </div>
+  </section>
+
+  <section class="uc shell" id="code">
+    <div class="ucHead">
+      <div class="ucIcon">💻</div>
+      <div class="ucTitleWrap">
+        <p class="sectionTag">USE CASE 01 · SOFTWARE ENGINEERING</p>
+        <h2>Ship working code, not just suggestions</h2>
+      </div>
+    </div>
+    <p class="ucScenario">“Fix a bug, add a feature, or clean up messy code — and prove it actually works.”</p>
+    <div class="ucBody">
+      <div class="ucCard">
+        <span class="label">HOW IT WORKS</span>
+        <ol class="ucSteps">
+          <li><b>1</b>Reads your actual codebase first, so changes fit how your project already works.</li>
+          <li><b>2</b>Makes the change directly in your files — no copy-pasting code out of a chat window.</li>
+          <li><b>3</b>Runs your real tests and build before calling the job done, and can undo everything with one click if something's wrong.</li>
+        </ol>
+      </div>
+      <div class="ucCard">
+        <span class="label">IN PLAIN WORDS</span>
+        <p class="ucExample">You ask: “Fix the login bug and make sure nothing else breaks.”<br><br>You get back a tested, working patch — with the test results to prove it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="uc shell" id="documents">
+    <div class="ucHead">
+      <div class="ucIcon">📄</div>
+      <div class="ucTitleWrap">
+        <p class="sectionTag">USE CASE 02 · BUSINESS DOCUMENTS</p>
+        <h2>Get a finished file, not a wall of text</h2>
+      </div>
+    </div>
+    <p class="ucScenario">“Turn a request into a real Word report, Excel model, or PowerPoint deck.”</p>
+    <div class="ucBody">
+      <div class="ucCard">
+        <span class="label">HOW IT WORKS</span>
+        <ol class="ucSteps">
+          <li><b>1</b>Produces actual formatted documents — headings, tables, a working table of contents — not markdown pasted into a text box.</li>
+          <li><b>2</b>Excel comes out with live, recalculating formulas, not numbers typed in by hand.</li>
+          <li><b>3</b>PowerPoint slides use real, editable charts and layouts designed for the content, not just a title and five bullet points.</li>
+        </ol>
+      </div>
+      <div class="ucCard">
+        <span class="label">IN PLAIN WORDS</span>
+        <p class="ucExample">You ask: “Build a 10-slide investor deck from this research.”<br><br>You get an actual .pptx file, ready to open and present — today.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="uc shell" id="research">
+    <div class="ucHead">
+      <div class="ucIcon">🔍</div>
+      <div class="ucTitleWrap">
+        <p class="sectionTag">USE CASE 03 · RESEARCH &amp; DILIGENCE</p>
+        <h2>Answers you can actually check</h2>
+      </div>
+    </div>
+    <p class="ucScenario">“Answer a hard question, and show your work so I can trust it.”</p>
+    <div class="ucBody">
+      <div class="ucCard">
+        <span class="label">HOW IT WORKS</span>
+        <ol class="ucSteps">
+          <li><b>1</b>Pulls facts from your own files and the web, and keeps track of exactly where each one came from.</li>
+          <li><b>2</b>Flags it when a new figure contradicts something it found earlier, instead of quietly overwriting it.</li>
+          <li><b>3</b>Keeps the same numbers consistent across every report, memo, or slide it writes about the same topic.</li>
+        </ol>
+      </div>
+      <div class="ucCard">
+        <span class="label">IN PLAIN WORDS</span>
+        <p class="ucExample">You ask: “Summarize this company's financials and flag any red flags.”<br><br>You get a sourced write-up — every claim traceable back to evidence.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="uc shell" id="safety">
+    <div class="ucHead">
+      <div class="ucIcon">↩</div>
+      <div class="ucTitleWrap">
+        <p class="sectionTag">USE CASE 04 · SAFE EXPERIMENTATION</p>
+        <h2>Let it take real action — without the fear</h2>
+      </div>
+    </div>
+    <p class="ucScenario">“I want it to actually do things, but I need an undo button I can trust.”</p>
+    <div class="ucBody">
+      <div class="ucCard">
+        <span class="label">HOW IT WORKS</span>
+        <ol class="ucSteps">
+          <li><b>1</b>Every file is captured exactly as it was, the instant before anything touches it.</li>
+          <li><b>2</b>One click restores an entire turn's changes — no manual cleanup, no guessing what changed.</li>
+          <li><b>3</b>A risky action always asks first; nothing destructive ever runs silently in the background.</li>
+        </ol>
+      </div>
+      <div class="ucCard">
+        <span class="label">IN PLAIN WORDS</span>
+        <p class="ucExample">You try a big refactor. It doesn't work out — one click, and every file is back exactly how it was.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="uc shell" id="automation">
+    <div class="ucHead">
+      <div class="ucIcon">🔌</div>
+      <div class="ucTitleWrap">
+        <p class="sectionTag">USE CASE 05 · AUTOMATION</p>
+        <h2>Put it to work inside your everyday tools</h2>
+      </div>
+    </div>
+    <p class="ucScenario">“Let it read and act inside the tools I already use — with my say-so at every step.”</p>
+    <div class="ucBody">
+      <div class="ucCard">
+        <span class="label">HOW IT WORKS</span>
+        <ol class="ucSteps">
+          <li><b>1</b>Connects to Gmail, Google Drive, Calendar, OneDrive/SharePoint, Dropbox, and more.</li>
+          <li><b>2</b>Anything it reads from outside is treated as information, never as a secret instruction to obey.</li>
+          <li><b>3</b>You approve what it's allowed to touch — nothing acts on your accounts without permission.</li>
+        </ol>
+      </div>
+      <div class="ucCard">
+        <span class="label">IN PLAIN WORDS</span>
+        <p class="ucExample">You ask: “Check tomorrow's meetings and draft a follow-up email for each.”<br><br>It works inside your real calendar and inbox — you review before anything sends.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="uc shell" id="models">
+    <div class="ucHead">
+      <div class="ucIcon">🧠</div>
+      <div class="ucTitleWrap">
+        <p class="sectionTag">USE CASE 06 · MODEL FREEDOM</p>
+        <h2>Pick the AI brain that fits the moment</h2>
+      </div>
+    </div>
+    <p class="ucScenario">“I don't want to be locked into one AI company — or pay for power I don't need.”</p>
+    <div class="ucBody">
+      <div class="ucCard">
+        <span class="label">HOW IT WORKS</span>
+        <ol class="ucSteps">
+          <li><b>1</b>Works with free and paid cloud models from multiple providers, side by side.</li>
+          <li><b>2</b>Can run entirely on your own machine with a local model — nothing has to leave your computer.</li>
+          <li><b>3</b>Same project, same memory, same rules — switch models mid-conversation without losing anything.</li>
+        </ol>
+      </div>
+      <div class="ucCard">
+        <span class="label">IN PLAIN WORDS</span>
+        <p class="ucExample">Use a free model for a quick task, switch to a stronger one for something hard — same conversation, same files.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="uc shell" id="industry">
+    <div class="ucHead">
+      <div class="ucIcon">🏢</div>
+      <div class="ucTitleWrap">
+        <p class="sectionTag">USE CASE 07 · INDUSTRY SOLUTIONS</p>
+        <h2>Purpose-built solutions for your industry</h2>
+      </div>
+    </div>
+    <p class="ucScenario">“I don't just want a general AI — I want something that already understands my industry.”</p>
+    <div class="ucBody">
+      <div class="ucCard">
+        <span class="label">HOW IT WORKS</span>
+        <ol class="ucSteps">
+          <li><b>1</b>The same underlying engine also powers ready-made, industry-specific products.</li>
+          <li><b>2</b><a href="pitch.html" style="color:var(--cyan)">Wrexlyn for Investments</a> is the first: built for private equity teams doing screening, deal evaluation, and document review.</li>
+          <li><b>3</b>It produces real IC notes and financial models — not generic chat answers about your deal. More industry-specific versions are on the way.</li>
+        </ol>
+      </div>
+      <div class="ucCard">
+        <span class="label">REAL EXAMPLE</span>
+        <p class="ucExample">A PE analyst asks for an initial screen on a target company — and gets a structured evaluation with a real, editable financial model attached.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ucAudience shell">
+    <div class="sectionIntro"><p class="sectionTag">WHO IT'S FOR</p><h2>WHO IS THIS<br><span>ACTUALLY FOR?</span></h2><p>Four kinds of teams, four different reasons to reach for it.</p></div>
+    <div class="featureGrid">
+      <article><span class="featureN">01</span><div class="featureIcon">👩‍💻</div><h3>Developers &amp; engineering teams</h3><p>Ship tested changes faster, without babysitting every step.</p></article>
+      <article><span class="featureN">02</span><div class="featureIcon">📊</div><h3>Analysts &amp; researchers</h3><p>Turn raw information into sourced, checkable deliverables.</p></article>
+      <article><span class="featureN">03</span><div class="featureIcon">🚀</div><h3>Founders &amp; operators</h3><p>Get real code, decks, and reports done without a big team.</p></article>
+      <article><span class="featureN">04</span><div class="featureIcon">🔐</div><h3>Security-conscious teams</h3><p>Keep code, data, and models under your own control.</p></article>
+    </div>
+  </section>
+
+  <section class="ucRecap shell">
+    <div class="sectionIntro"><p class="sectionTag">AT A GLANCE</p><h2>EVERY USE CASE,<br><span>IN ONE PLACE.</span></h2><p>&nbsp;</p></div>
+    <div class="tableWrap"><table><tbody>
+      <tr><td><span class="emoji">💻</span><strong>Software engineering</strong></td><td>Fix, build, and ship tested code changes</td></tr>
+      <tr><td><span class="emoji">📄</span><strong>Business documents</strong></td><td>Real Word, Excel &amp; PowerPoint files, not text dumps</td></tr>
+      <tr><td><span class="emoji">🔍</span><strong>Research &amp; diligence</strong></td><td>Sourced answers you can actually verify</td></tr>
+      <tr><td><span class="emoji">↩</span><strong>Safe experimentation</strong></td><td>Every change reversible, one click to undo</td></tr>
+      <tr><td><span class="emoji">🔌</span><strong>Automation</strong></td><td>Acts inside Gmail, Drive, Calendar &amp; more</td></tr>
+      <tr><td><span class="emoji">🧠</span><strong>Model freedom</strong></td><td>Any cloud model, or fully local — your choice</td></tr>
+      <tr><td><span class="emoji">🏢</span><strong>Industry solutions</strong></td><td>Purpose-built products like Wrexlyn for Investments</td></tr>
+    </tbody></table></div>
+  </section>
+
+  <section class="finalCta shell"><div class="ctaGlow"></div><p class="sectionTag">SEE IT FOR YOURSELF</p><h2>ONE TEAMMATE.<br>EVERY KIND OF WORK.</h2><p>Experience the interface, or take the deck with you.</p><div class="heroActions"><a class="primary" href="demo.html">Launch demo <span>↗</span></a><a class="secondary" href="assets/Wrexlyn-Use-Cases.pdf" download>Download use cases (.pdf) ↓</a><a class="secondary" href="pitch.html">View pitch →</a></div><small>Proprietary · Local-first · Private deployment available</small></section>
+
+  <footer class="shell"><div class="footerIdentity"><a href="index.html#top" class="brand"><img class="brand-logo" src="icon-512.png" alt="Wrexlyn logo"><span>WREXLYN</span></a><small>BY NISHANT PRABHAKAR</small></div><p>© 2026 NISHANT PRABHAKAR. ALL RIGHTS RESERVED.<br>WREXLYN IS PROPRIETARY SOFTWARE.</p><div><a href="demo.html">Demo</a><a href="verification-report.html">Verification</a><a href="documentation.html">Documentation</a><a href="pitch.html">Pitch</a><a href="index.html#top">Home ↑</a></div></footer>
+</main>
+<script src="landing.js" defer></script>
+</body>
+</html>

@@ -84,8 +84,8 @@
   .rail-mark .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); flex-shrink: 0; }
   .rail-meta { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); line-height: 1.6; }
   .site-nav { display: flex; flex-direction: column; gap: 2px; padding: 10px 0; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
-  .site-nav a { font-family: var(--mono); font-size: 12px; color: var(--ink-dim); border-bottom: none; padding: 4px 0; }
-  .site-nav a.current { color: var(--accent); }
+  .site-nav a { font-family: var(--mono); font-size: 13.5px; font-weight: 600; color: var(--ink-dim); border-bottom: none; padding: 7px 8px; margin: 0 -8px; border-radius: 3px; }
+  .site-nav a.current { color: var(--accent); background: rgba(0,229,160,.08); font-weight: 700; }
   .site-nav a:hover { color: var(--ink); }
   .rail nav { display: flex; flex-direction: column; gap: 2px; margin-top: 4px; }
   .navlink {
@@ -251,6 +251,7 @@
     <div class="site-nav">
       <a href="index.html">&larr; Wrexlyn home</a>
       <a href="demo.html">Chat demo</a>
+      <a href="use-cases.html">Use cases</a>
       <a href="documentation.html" class="current">Documentation</a>
       <a href="pitch.html">Pitch deck</a>
       <a href="product-demo.html">Product tour</a>
