@@ -36,7 +36,7 @@
   --accent-2:#78b7ff;
   --mint:#63f7c2;
 }
-html{background:var(--wx-bg-deep);color-scheme:dark}
+html{background:var(--wx-bg-deep);color-scheme:dark;overflow-x:hidden}
 body.wrexlyn-site{
   min-height:100vh;
   color:var(--wx-text);
@@ -165,6 +165,104 @@ body.wrexlyn-site::after{
   body.wrexlyn-site .stepCard:hover,
   body.wrexlyn-site .featureGrid article:hover,
   body.wrexlyn-site .entryGrid article:hover{transform:none;box-shadow:none}
+}
+
+/* 2026 type, logo and contrast specification — shared by every public page. */
+:root:root{
+  --wx-nav-size:13px;
+  --wx-label-size:12px;
+  --wx-body-size:16px;
+  --wx-small-size:13px;
+  --wx-h1-size:clamp(54px,7.2vw,104px);
+  --wx-h2-size:clamp(38px,5.2vw,72px);
+  --wx-h3-size:clamp(20px,2.4vw,28px);
+}
+body.wrexlyn-site{font-size:var(--wx-body-size);line-height:1.7;overflow-x:hidden}
+body.wrexlyn-site :is(.navlinks,.topbar nav,.site-nav){font-size:var(--wx-nav-size) !important;line-height:1.35}
+body.wrexlyn-site :is(.sectionTag,.kicker,.eyebrow,.label,.slide-num,.hero-kicker){font-size:var(--wx-label-size) !important;line-height:1.4;letter-spacing:.14em}
+body.wrexlyn-site main :is(h1,.hero h1){font-size:var(--wx-h1-size);line-height:.94;letter-spacing:-.055em}
+body.wrexlyn-site main :is(h2){font-size:var(--wx-h2-size);line-height:1;letter-spacing:-.045em}
+body.wrexlyn-site main :is(h3){font-size:var(--wx-h3-size);line-height:1.14;letter-spacing:-.025em}
+body.wrexlyn-site main :is(p,li){font-size:var(--wx-body-size);line-height:1.72}
+body.wrexlyn-site main :is(small,figcaption,.disclaimer){font-size:var(--wx-small-size);line-height:1.55}
+body.wrexlyn-site :is(.navlinks a,.topbar nav a,.site-nav a){font-weight:750;color:#c9dbd3 !important}
+body.wrexlyn-site :is(.navlinks a,.topbar nav a,.site-nav a):hover,
+body.wrexlyn-site :is(.navlinks a.current,.topbar nav a.current,.site-nav a.current){color:var(--wx-mint) !important}
+body.wrexlyn-site :is(.brand-logo,.brand img,.rail-mark img,.mobile-brand img){width:34px !important;height:34px !important;object-fit:contain;flex:0 0 34px}
+body.wrexlyn-site :is(.hero-logo,.closing-logo){width:76px !important;height:76px !important;object-fit:contain}
+body.wrexlyn-site :is(.heroCopy,.lede,.tagline,.sub){color:#b6c8c0 !important}
+body.wrexlyn-site :is(.card p,.stepCard p,.featureGrid article p,.entryGrid article p,.evidenceGrid article p,.principleGrid article p,.cap-grid article p,.benefit-grid p){color:#a7bbb2 !important}
+body.wrexlyn-site :is(.card,.stepCard,.featureGrid article,.entryGrid article,.evidenceGrid article,.principleGrid article,.cap-grid article){background-color:#0b1b15 !important}
+body.wrexlyn-site table{background:#07130f;color:#eefaf4}
+body.wrexlyn-site th{color:#b8cbc3 !important;background:rgba(99,247,194,.065) !important}
+body.wrexlyn-site td{color:#b9cbc4 !important}
+body.wrexlyn-site td.strong{color:#fff !important}
+body.wrexlyn-site code{color:#d3ffeb;background:#030a07;border-color:rgba(99,247,194,.2)}
+
+/* High-contrast model topology, correcting the low-legibility provider panel. */
+body.wrexlyn-site .providers{
+  border:1px solid rgba(99,247,194,.24);
+  background:
+    radial-gradient(circle at 50% 50%,rgba(99,247,194,.13),transparent 28%),
+    linear-gradient(rgba(99,247,194,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(99,247,194,.035) 1px,transparent 1px),
+    #04100c;
+  background-size:auto,40px 40px,40px 40px,auto;
+  box-shadow:0 28px 75px rgba(0,0,0,.38),inset 0 0 80px rgba(99,247,194,.025);
+}
+body.wrexlyn-site .providers::before,
+body.wrexlyn-site .providers::after{height:2px !important;background:rgba(99,247,194,.28) !important}
+body.wrexlyn-site .provider{
+  min-width:112px;
+  padding:15px 18px !important;
+  border:1px solid rgba(99,247,194,.55) !important;
+  background:#102a20 !important;
+  color:#f4fff9 !important;
+  box-shadow:0 12px 28px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.06);
+  font-size:13px !important;
+  line-height:1.2;
+  letter-spacing:.06em !important;
+  text-align:center;
+  text-shadow:0 1px 2px #000;
+}
+body.wrexlyn-site .core{
+  width:142px;height:142px;
+  background:#07130f !important;
+  color:var(--wx-mint) !important;
+  border:2px solid var(--wx-mint);
+  box-shadow:0 0 0 18px rgba(99,247,194,.055),0 0 60px rgba(99,247,194,.2) !important;
+}
+body.wrexlyn-site .core small{font-size:11px !important;color:#d8ffed;bottom:18px}
+
+/* Dense technical pages keep the shared scale without oversized chapter titles. */
+body.documentation-page main .cover h1{font-size:clamp(50px,6vw,76px)}
+body.documentation-page main .chapter h2{font-size:clamp(27px,3vw,38px);line-height:1.12}
+body.documentation-page main .chapter h3{font-size:clamp(18px,2vw,24px)}
+body.documentation-page main :is(p,li){font-size:16px}
+body.documentation-page .rail :is(a,.rail-meta){font-size:13px !important;line-height:1.5}
+body.wrexlyn-site .console :is(small,.sideLabel,.step small,.metric small),
+body.product-tour-page .workstation :is(small,p,.algo span,.algo em){font-size:12px !important;line-height:1.5}
+body.wrexlyn-site :is(main,footer,.deck,.deck-nav) :is(a,button){font-size:max(12px,1em) !important;line-height:1.35}
+body.wrexlyn-site :is(a,button){font-size:max(12px,1em) !important}
+body.wrexlyn-site :is(main,.deck,.app-shell,footer) :is(p,li,figcaption){font-size:max(12px,1em) !important}
+body.wrexlyn-site .deck .hero-slide h1{font-size:var(--wx-h1-size) !important;line-height:.94;letter-spacing:-.055em}
+body.wrexlyn-site .deck .slide h2{font-size:var(--wx-h2-size);line-height:1;letter-spacing:-.045em}
+body.wrexlyn-site .deck .slide h3{font-size:var(--wx-h3-size);line-height:1.14}
+body.wrexlyn-site .deck .slide :is(p,li){font-size:var(--wx-body-size);line-height:1.72}
+body.wrexlyn-site .deck .slide :is(small,figcaption){font-size:var(--wx-small-size);line-height:1.55}
+body.wrexlyn-site .deck-nav a{font-size:12px !important}
+body.wrexlyn-site .sidebar-header img{width:34px !important;height:34px !important;object-fit:contain;filter:drop-shadow(0 0 16px rgba(99,247,194,.4))}
+body.wrexlyn-site .topbar-logo{width:34px;height:34px;object-fit:contain;filter:drop-shadow(0 0 14px rgba(99,247,194,.4))}
+body.wrexlyn-site .sidebar-header .logo-text-group b{font-size:14px;letter-spacing:.12em}
+body.wrexlyn-site .sidebar-header .logo-text-group small{font-size:11px !important;color:#a7bbb2}
+
+@media(max-width:700px){
+  :root:root{--wx-nav-size:12px;--wx-body-size:16px;--wx-small-size:12px;--wx-h1-size:clamp(44px,13vw,60px);--wx-h2-size:clamp(34px,10vw,52px);--wx-h3-size:clamp(20px,6vw,26px)}
+  body.wrexlyn-site :is(.brand-logo,.brand img,.rail-mark img,.mobile-brand img){width:30px !important;height:30px !important;flex-basis:30px}
+  body.wrexlyn-site .topbar-logo{width:30px;height:30px}
+  body.wrexlyn-site :is(.hero-logo,.closing-logo){width:62px !important;height:62px !important}
+  body.wrexlyn-site .provider{min-width:96px;padding:13px 12px !important;font-size:11px !important}
+  body.wrexlyn-site .core{width:120px;height:120px}
 }
 @media(prefers-reduced-motion:reduce){
   body.wrexlyn-site *,body.wrexlyn-site *::before,body.wrexlyn-site *::after{scroll-behavior:auto !important;animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}

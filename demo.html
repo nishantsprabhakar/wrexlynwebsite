@@ -7,7 +7,7 @@
 <meta name="description" content="Browser-only chat demo of Wrexlyn — choose a supported provider, bring your own API key, and talk to the model in the real Wrexlyn interface." />
 <link rel="icon" href="icon-512.png" />
 <link rel="stylesheet" href="style.css?v=20260825c" />
-<link rel="stylesheet" href="wrexlyn-theme.css?v=20260827" />
+<link rel="stylesheet" href="wrexlyn-theme.css?v=20260827c" />
 <script>
   // Applied before first paint so switching pages (or reloading) never flashes the wrong theme.
   // Fallback matches the real app's own default of "tactical" when nothing is saved yet.
@@ -84,6 +84,7 @@
   <div class="main-col">
     <header class="topbar">
       <div class="topbar-left">
+        <img class="topbar-logo" src="icon-512.png" alt="Wrexlyn logo" />
         <span class="status-dot" id="status-dot"></span>
         <span id="status-text">not connected</span>
       </div>
