@@ -169,3 +169,81 @@ body.wrexlyn-site::after{
 @media(prefers-reduced-motion:reduce){
   body.wrexlyn-site *,body.wrexlyn-site *::before,body.wrexlyn-site *::after{scroll-behavior:auto !important;animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
 }
+
+/* Documentation — a first-class product surface, not a long text file. */
+body.documentation-page .rail{
+  z-index:20;
+  background:linear-gradient(180deg,rgba(4,13,9,.97),rgba(6,18,13,.94));
+  border-right-color:var(--wx-line-hot);
+  box-shadow:22px 0 70px rgba(0,0,0,.22);
+  scrollbar-color:#285744 transparent;
+}
+body.documentation-page .rail-mark{font-size:17px;letter-spacing:.08em;color:#fff}
+body.documentation-page .rail-meta{padding:13px 0 2px;color:#91a69c}
+body.documentation-page .site-nav a,
+body.documentation-page .navlink{transition:background .18s,color .18s,transform .18s}
+body.documentation-page .site-nav a:hover,
+body.documentation-page .navlink:hover{transform:translateX(3px)}
+body.documentation-page .cover{
+  max-width:1040px;
+  min-height:500px;
+  justify-content:center;
+  padding:88px 64px 64px;
+  background:radial-gradient(580px circle at 22% 12%,rgba(99,247,194,.08),transparent 67%);
+}
+body.documentation-page .cover h1{font-size:clamp(48px,6vw,76px);letter-spacing:-.055em;line-height:.94}
+body.documentation-page .cover .tagline{max-width:760px;font-size:19px;line-height:1.7}
+body.documentation-page section.chapter{max-width:1040px;padding-top:72px;padding-bottom:38px}
+body.documentation-page .chapter-head h2{font-size:clamp(25px,3vw,36px);letter-spacing:-.035em}
+body.documentation-page .chapter-num{box-shadow:0 0 24px rgba(99,247,194,.08)}
+body.documentation-page .shot{
+  border-color:rgba(99,247,194,.24);
+  background:#040b08;
+  box-shadow:0 26px 70px rgba(0,0,0,.34),0 0 0 1px rgba(255,255,255,.018) inset;
+}
+body.documentation-page .shot img{background:#07100d}
+body.documentation-page .shot figcaption{color:#a8bbb3;background:rgba(9,23,17,.96);border-top-color:var(--wx-line)}
+body.documentation-page .mobile-bar{
+  background:rgba(4,13,9,.95);
+  border-bottom-color:var(--wx-line-hot);
+  box-shadow:0 12px 40px rgba(0,0,0,.25);
+  backdrop-filter:blur(18px);
+}
+
+/* Product tour — flagship polish equal to the landing page. */
+body.product-tour-page .topbar{position:sticky;top:0;background:rgba(4,13,9,.9) !important;backdrop-filter:blur(18px);z-index:40}
+body.product-tour-page .hero{overflow:hidden}
+body.product-tour-page .hero::before{
+  content:"";
+  position:absolute;
+  width:760px;height:760px;right:-220px;top:-120px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(99,247,194,.1),transparent 67%);
+  pointer-events:none;
+}
+body.product-tour-page .hero-copy,
+body.product-tour-page .system-orbit{position:relative;z-index:1}
+body.product-tour-page .hero h1{font-size:clamp(58px,7vw,104px)}
+body.product-tour-page .workstation{
+  border-color:rgba(99,247,194,.34);
+  box-shadow:0 55px 130px rgba(0,0,0,.55),0 0 70px rgba(99,247,194,.035);
+}
+body.product-tour-page .mission-tabs button{transition:background .2s,color .2s,transform .2s}
+body.product-tour-page .mission-tabs button:hover{position:relative;z-index:2;border-color:var(--mint);transform:translateY(-2px)}
+body.product-tour-page .cap-grid article{background:linear-gradient(145deg,rgba(14,31,25,.7),rgba(5,14,10,.42));transition:transform .22s,background .22s,border-color .22s}
+body.product-tour-page .cap-grid article:hover{transform:translateY(-5px);background:rgba(99,247,194,.055);border-color:rgba(99,247,194,.34)}
+body.product-tour-page .proof-stack>div{transition:padding-left .2s,background .2s}
+body.product-tour-page .proof-stack>div:hover{padding-left:14px;background:linear-gradient(90deg,rgba(99,247,194,.045),transparent)}
+body.product-tour-page .cta{position:relative;overflow:hidden;background:radial-gradient(600px circle at 50% 50%,rgba(99,247,194,.08),transparent 68%)}
+
+@media(max-width:1040px){
+  body.documentation-page .cover{min-height:auto;padding:68px 28px 46px}
+  body.documentation-page section.chapter{padding-top:58px}
+}
+@media(max-width:700px){
+  body.documentation-page .cover h1{font-size:14vw}
+  body.documentation-page .cover .tagline{font-size:16px}
+  body.documentation-page section.chapter{padding-top:50px;padding-bottom:28px}
+  body.product-tour-page .topbar{position:relative}
+  body.product-tour-page .hero::before{width:420px;height:420px;right:-210px}
+}
