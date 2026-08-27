@@ -22,6 +22,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # Relies on ubuntu-latest's preinstalled node and unzip -- no package.json/build
+      # step exists for this static site, so nothing to install first.
+      - name: Check for leaked internal implementation details
+        run: node scripts/check-leaks.js
       - uses: actions/configure-pages@v5
         with:
           enablement: true
