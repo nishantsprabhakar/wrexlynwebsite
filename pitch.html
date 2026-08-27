@@ -3,7 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Wrexlyn — Pitch</title>
+<meta name="description" content="The executive case for Wrexlyn: the proprietary, local-first execution and verification layer for AI work." />
+<meta name="theme-color" content="#070b0d" />
+<title>Wrexlyn — Executive Pitch</title>
 <link rel="icon" href="icon-512.png" />
 <style>
   :root {
@@ -21,7 +23,9 @@
     --accent: #0d9a70; --accent-dim: rgba(13, 154, 112, 0.1); --accent-2: #2461d6; --warn: #b3701a; --danger: #c53d31;
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 92px; }
   html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); }
+  body::before { content: ""; position: fixed; inset: 0; pointer-events: none; background: radial-gradient(700px circle at 75% 10%, rgba(51,224,168,.075), transparent 65%), linear-gradient(rgba(255,255,255,.012) 1px, transparent 1px), linear-gradient(90deg,rgba(255,255,255,.012) 1px, transparent 1px); background-size: auto, 48px 48px, 48px 48px; }
   body { font-size: 16px; line-height: 1.6; }
   a { color: var(--accent-2); }
   h1, h2, h3 { font-family: var(--mono); font-weight: 750; text-wrap: balance; letter-spacing: -0.025em; margin: 0; color: var(--headline); text-shadow: 0 0 28px rgba(51,224,168,.08); }
@@ -37,22 +41,29 @@
   .topbar nav a.current { color: #63f7c2; border-bottom-color: #63f7c2; }
   .dl-btn { font-family: var(--mono); font-size: 12.5px; color: var(--bg); background: var(--accent); padding: 7px 14px; border-radius: var(--radius); text-decoration: none; }
 
-  .deck { max-width: 980px; margin: 0 auto; }
-  .slide { position: relative; padding: 90px 32px; border-bottom: 1px solid var(--line-soft); }
+  .deck { max-width: 1040px; margin: 0 auto; position: relative; }
+  .slide { position: relative; padding: 105px 44px; border-bottom: 1px solid var(--line-soft); }
+  .slide:nth-child(n+2) { min-height: 72vh; display: flex; flex-direction: column; justify-content: center; }
   .slide::after { content: ""; position: absolute; top: 32px; right: 32px; width: 28px; height: 28px; background: url("icon-512.png") center/contain no-repeat; opacity: .46; filter: drop-shadow(0 0 10px rgba(51,224,168,.25)); }
   .slide:last-child { border-bottom: none; }
   .slide-num { font-family: var(--mono); font-size: 11px; color: var(--ink-faint); letter-spacing: 0.08em; margin-bottom: 18px; }
 
-  .hero-slide { min-height: 78vh; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
+  .hero-slide { min-height: calc(100vh - 58px); display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
   .hero-brand { display: flex; align-items: center; gap: 18px; }
   .hero-logo { width: 68px; height: 68px; filter: drop-shadow(0 0 20px rgba(51,224,168,.32)); }
-  .hero-slide h1 { font-size: 64px; letter-spacing: 0.035em; }
-  .hero-slide .sub { font-size: 19px; color: var(--ink-dim); max-width: 620px; margin-top: 16px; }
+  .hero-slide h1 { font-size: clamp(64px,9vw,108px); line-height:.86; letter-spacing: -.055em; }
+  .hero-slide .sub { font-size: 20px; line-height:1.65; color: var(--ink-dim); max-width: 760px; margin-top: 24px; }
   .hero-kicker { font-family: var(--mono); color: var(--accent); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 18px; }
   .proof-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; width: 100%; max-width: 860px; margin-top: 38px; background: var(--line-soft); border: 1px solid var(--line-soft); }
   .proof { background: var(--surface); padding: 15px; }
   .proof strong { display: block; color: var(--accent); font-family: var(--mono); font-size: 17px; }
   .proof span { display: block; color: var(--ink-faint); font-size: 11px; margin-top: 3px; }
+  .pitch-thesis { width:100%; max-width:860px; display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center; margin-top:26px; padding:17px 19px; border:1px solid rgba(51,224,168,.24); background:linear-gradient(90deg,rgba(51,224,168,.08),rgba(51,224,168,.015)); }
+  .pitch-thesis strong { color:#fff; font-family:var(--mono); font-size:12px; letter-spacing:.04em; }
+  .pitch-thesis span { color:var(--accent); font:700 9px var(--mono); letter-spacing:.12em; white-space:nowrap; }
+  .deck-nav { position:sticky; top:58px; z-index:4; display:flex; justify-content:center; gap:4px; padding:8px 14px; overflow-x:auto; background:rgba(8,13,15,.9); border-bottom:1px solid var(--line-soft); backdrop-filter:blur(14px); scrollbar-width:none; }
+  .deck-nav::-webkit-scrollbar{display:none}.deck-nav a{flex:0 0 auto;padding:7px 11px;color:var(--ink-faint);font:700 9px var(--mono);letter-spacing:.09em;text-decoration:none;border:1px solid transparent}.deck-nav a:hover,.deck-nav a.active{color:var(--accent);border-color:rgba(51,224,168,.24);background:var(--accent-dim)}
+  .deck-progress{position:fixed;top:0;left:0;width:100%;height:2px;z-index:10}.deck-progress i{display:block;height:100%;background:var(--accent);box-shadow:0 0 16px var(--accent);transform-origin:left;transform:scaleX(0)}
 
   .slide h2 { font-size: 34px; line-height: 1.18; max-width: 820px; margin-bottom: 22px; }
   .slide .body { max-width: 720px; }
@@ -108,11 +119,12 @@
     .topbar nav a.current { border-color: var(--accent); }
     .dl-btn { flex: 0 0 auto; padding: 7px 10px; font-size: 11px; }
     .deck { width: 100%; max-width: none; }
-    .slide { padding: 52px 20px; }
+    .deck-nav{top:102px;justify-content:flex-start}.slide { padding: 58px 20px; }
     .hero-slide { min-height: auto; padding-top: 68px; padding-bottom: 68px; }
     .hero-slide h1 { font-size: clamp(37px, 13vw, 54px); line-height: 1.05; overflow-wrap: anywhere; }
     .hero-slide .sub { font-size: 16px; line-height: 1.55; }
     .proof-strip { grid-template-columns: 1fr 1fr; }
+    .pitch-thesis{grid-template-columns:1fr;gap:8px}.pitch-thesis span{white-space:normal}
     .slide h2 { font-size: clamp(24px, 8vw, 32px); line-height: 1.15; overflow-wrap: anywhere; }
     .slide .body p { font-size: 15px; }
     .cols { grid-template-columns: minmax(0, 1fr); gap: 18px; }
@@ -138,6 +150,7 @@
 </style>
 </head>
 <body>
+<div class="deck-progress" aria-hidden="true"><i></i></div>
 
 <div class="topbar">
   <div class="mark"><img class="brand-logo" src="icon-512.png" alt="Wrexlyn logo" />WREXLYN<span class="byline">by Nishant Prabhakar</span></div>
@@ -152,24 +165,29 @@
   <a class="dl-btn" href="assets/Wrexlyn-Pitch-Deck.pdf" download>Pitch deck (.pdf) &#8595;</a>
 </div>
 
+<nav class="deck-nav" aria-label="Pitch chapters">
+  <a href="#thesis" class="active">THESIS</a><a href="#problem">PROBLEM</a><a href="#system">SYSTEM</a><a href="#proof">PROOF</a><a href="#advantage">ADVANTAGE</a><a href="#platform">PLATFORM</a><a href="#close">NEXT STEP</a>
+</nav>
+
 <div class="deck">
 
-  <section class="slide hero-slide">
-    <div class="slide-num">01 / 21</div>
+  <section class="slide hero-slide" id="thesis">
+    <div class="slide-num">01 / 31</div>
     <div class="hero-kicker">The local-first Agentic OS</div>
     <div class="hero-brand"><img class="hero-logo" src="icon-512.png" alt="Wrexlyn logo" /><h1>WREXLYN</h1></div>
-    <p class="sub">Turn any compatible LLM into a governed software delivery system that can understand a repository, act safely, prove its work and recover when it fails. One kernel, swappable models, and a growing family of vertical products built on top &mdash; Wrexlyn for Investments is the first.</p>
+    <p class="sub"><strong style="color:#fff">Models generate. Wrexlyn delivers.</strong> Turn any compatible LLM into a governed execution system that understands the workspace, acts within policy, proves its work and recovers when it fails. One proprietary kernel. Swappable intelligence. Compounding vertical products.</p>
     <div class="proof-strip">
       <div class="proof"><strong>6 states</strong><span>objective verification outcomes</span></div>
       <div class="proof"><strong>Best-of-N</strong><span>isolated Git worktree candidates</span></div>
       <div class="proof"><strong>Any model</strong><span>hosted endpoint or fully local</span></div>
       <div class="proof"><strong>Local-first</strong><span>code, evidence and controls stay with you</span></div>
     </div>
+    <div class="pitch-thesis"><strong>The enduring asset is not the model. It is the governed system that turns intelligence into accountable outcomes.</strong><span>THE WREXLYN THESIS →</span></div>
     <p class="sub" style="font-size: 15px; margin-top: 28px; color: var(--ink-faint);">Created by Nishant Prabhakar</p>
   </section>
 
-  <section class="slide">
-    <div class="slide-num">02 / 21</div>
+  <section class="slide" id="problem">
+    <div class="slide-num">02 / 31</div>
     <h2>Every model can generate. Almost none can prove, govern and recover.</h2>
     <div class="body">
       <ul>
@@ -181,8 +199,8 @@
     </div>
   </section>
 
-  <section class="slide">
-    <div class="slide-num">03 / 21</div>
+  <section class="slide" id="system">
+    <div class="slide-num">03 / 31</div>
     <h2>Wrexlyn turns interchangeable models into accountable execution</h2>
     <p class="dim">Wrexlyn owns the execution chain above the model: context acquisition, governed action, objective checks, failure recovery and evidence-grade delivery.</p>
     <div class="body">
@@ -196,7 +214,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">03A / 21</div>
+    <div class="slide-num">03A / 31</div>
     <h2>Thirteen completed phases create one defensible execution layer</h2>
     <div class="cols">
       <div>
@@ -220,7 +238,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">03B / 21</div>
+    <div class="slide-num">03B / 31</div>
     <h2>Buy verified delivery capacity, not another AI seat</h2>
     <div class="cols">
       <div>
@@ -239,8 +257,8 @@
     <p class="dim">The commercial promise is testable: ship more accepted work per engineering hour while preserving customer control over code, models and evidence. No productivity percentage is claimed until a customer pilot establishes it.</p>
   </section>
 
-  <section class="slide">
-    <div class="slide-num">03C / 21</div>
+  <section class="slide" id="proof">
+    <div class="slide-num">03C / 31</div>
     <h2>Technical capability mapped to the benchmarks buyers recognize</h2>
     <div class="table-wrap">
       <table>
@@ -255,7 +273,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">03D / 21</div>
+    <div class="slide-num">03D / 31</div>
     <h2>Wrexlyn is engineered for harness-level performance</h2>
     <div class="cols">
       <div>
@@ -275,7 +293,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">03E / 21</div>
+    <div class="slide-num">03E / 31</div>
     <h2>The benchmark standard Wrexlyn should publish</h2>
     <div class="table-wrap">
       <table>
@@ -293,7 +311,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">03F / 21</div>
+    <div class="slide-num">03F / 31</div>
     <h2>Peer score: 81/100 &mdash; top-tier architecture, proof gap remaining</h2>
     <div class="table-wrap">
       <table>
@@ -310,7 +328,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">03G / 21</div>
+    <div class="slide-num">03G / 31</div>
     <h2>Where Wrexlyn wins &mdash; and what must be proven next</h2>
     <div class="cols">
       <div>
@@ -340,7 +358,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">03H / 21</div>
+    <div class="slide-num">03H / 31</div>
     <h2>An Agentic OS &mdash; and its first vertical product</h2>
     <div class="body">
       <p>Wrexlyn is the closest thing to an <strong>agentic operating system</strong>: a kernel loop that dispatches work to whichever model you choose, a permission layer that governs every action against your files, shell and network, a checkpoint/rollback layer that behaves like a filesystem journal, and an installable-capability layer &mdash; skills &mdash; that runs on top of it. Models are the swappable hardware. Wrexlyn is the OS.</p>
@@ -364,7 +382,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">04 / 21</div>
+    <div class="slide-num">04 / 31</div>
     <h2>Four categories answer "write my code" &mdash; one trade-off differs</h2>
     <div class="table-wrap">
       <table>
@@ -379,7 +397,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">05 / 21</div>
+    <div class="slide-num">05 / 31</div>
     <h2>The product</h2>
     <div class="cols">
       <div>
@@ -397,7 +415,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">06 / 21</div>
+    <div class="slide-num">06 / 31</div>
     <h2>How the V-Cycle runtime works</h2>
     <div class="cols">
       <div>
@@ -414,19 +432,19 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">07 / 21</div>
+    <div class="slide-num">07 / 31</div>
     <h2>What that looks like when something goes wrong</h2>
     <figure class="shot"><img src="assets/screenshots/pitch-02.png" alt="" loading="lazy" decoding="async" /><figcaption>Verification failed, critic independently flagged the real gap, one-click revert.</figcaption></figure>
   </section>
 
   <section class="slide">
-    <div class="slide-num">08 / 21</div>
+    <div class="slide-num">08 / 31</div>
     <h2>High-risk actions get a harder gate</h2>
     <figure class="shot"><img src="assets/screenshots/pitch-03.png" alt="" loading="lazy" decoding="async" /><figcaption>No "always allow" exists for this tier — by design, not a missing feature.</figcaption></figure>
   </section>
 
   <section class="slide">
-    <div class="slide-num">09 / 21</div>
+    <div class="slide-num">09 / 31</div>
     <h2>The Nishant Convergence Protocol</h2>
     <div class="body">
       <p>A weak or free model is rarely bad at a <em>first</em> attempt. It's bad at self-correcting when that attempt fails &mdash; a generic &ldquo;try again&rdquo; gets a near-identical repeat, or a thrash to something unrelated. NCP targets exactly that moment.</p>
@@ -445,7 +463,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">10 / 21</div>
+    <div class="slide-num">10 / 31</div>
     <h2>How this differs</h2>
     <div class="table-wrap">
       <table>
@@ -467,8 +485,8 @@
     </div>
   </section>
 
-  <section class="slide">
-    <div class="slide-num">10A / 21</div>
+  <section class="slide" id="advantage">
+    <div class="slide-num">10A / 31</div>
     <h2>The moat: four things a fork of a wrapper can't copy</h2>
     <p class="dim">Anyone can call the same model APIs. What can't be cloned by pointing at the same endpoint is the governed OS wrapped around them &mdash; four compounding, named layers of proprietary work.</p>
     <div class="cols">
@@ -485,7 +503,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">11 / 21</div>
+    <div class="slide-num">11 / 31</div>
     <h2>Real document generation, not a generic file write in a costume</h2>
     <div class="body">
       <ul>
@@ -497,7 +515,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">12 / 21</div>
+    <div class="slide-num">12 / 31</div>
     <h2>A quality gate the model can't talk its way past</h2>
     <div class="body">
       <p class="dim">Every document a model writes is a claim about its own work. Wrexlyn doesn't take that claim on faith — it checks the file that actually landed on disk.</p>
@@ -511,7 +529,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">13 / 21</div>
+    <div class="slide-num">13 / 31</div>
     <h2>It remembers what you tell it &mdash; and what it got wrong</h2>
     <div class="table-wrap">
       <table>
@@ -524,8 +542,8 @@
     <p class="dim">No autonomous rewriting of Wrexlyn's own source. Lessons and preferences steer the next generation at the prompt level &mdash; fully visible, fully reversible. A real code bug still gets fixed the way any real bug does: reviewed, verified, shipped.</p>
   </section>
 
-  <section class="slide">
-    <div class="slide-num">13A / 21</div>
+  <section class="slide" id="platform">
+    <div class="slide-num">13A / 31</div>
     <h2>Self-learning: the platform proposes its own upgrades</h2>
     <p class="dim">Preferences and lessons are passive memory. This is active: Wrexlyn watches its own performance and drafts its own improvements &mdash; without ever being trusted to apply one unsupervised.</p>
     <div class="cols">
@@ -542,7 +560,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">14 / 21</div>
+    <div class="slide-num">14 / 31</div>
     <h2>Use our providers, your endpoint, or your own local model</h2>
     <div class="table-wrap">
       <table>
@@ -561,13 +579,13 @@
   </section>
 
   <section class="slide phone-slide">
-    <div class="slide-num">15 / 21</div>
+    <div class="slide-num">15 / 31</div>
     <h2>Access on desktop, terminal, or phone</h2>
     <figure class="shot"><img src="assets/screenshots/pitch-04.png" alt="" loading="lazy" decoding="async" /><figcaption>Same session, phone-width viewport — QR code pairing from Settings, no separate app.</figcaption></figure>
   </section>
 
   <section class="slide">
-    <div class="slide-num">16 / 21</div>
+    <div class="slide-num">16 / 31</div>
     <h2>Even the browser-only demo is honestly scoped</h2>
     <div class="body">
       <ul>
@@ -579,7 +597,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">17 / 21</div>
+    <div class="slide-num">17 / 31</div>
     <h2>Also in the Wrexlyn portfolio: a private library of scoring algorithms</h2>
     <p class="dim">Eight sectors. One shared discipline. Every score below came out of a real, runnable implementation — not a demo number.</p>
     <div class="table-wrap">
@@ -598,7 +616,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">18 / 21</div>
+    <div class="slide-num">18 / 31</div>
     <h2>Not eight one-off hacks &mdash; one shared discipline</h2>
     <p class="dim">Named, versioned frameworks, not an analyst's gut-check that means something different depending on who's asking.</p>
     <div class="body">
@@ -611,7 +629,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">19 / 21</div>
+    <div class="slide-num">19 / 31</div>
     <h2>Auditable, not a black box</h2>
     <p class="dim">The differentiator isn't any single formula &mdash; it's that every claim is checkable.</p>
     <div class="body">
@@ -624,7 +642,7 @@
   </section>
 
   <section class="slide">
-    <div class="slide-num">20 / 21</div>
+    <div class="slide-num">20 / 31</div>
     <h2>Documented like an asset, not a slide deck</h2>
     <p class="dim">Trade secret protection today; the patent question addressed honestly, not oversold.</p>
     <div class="body">
@@ -636,12 +654,13 @@
     </div>
   </section>
 
-  <section class="slide closing">
-    <div class="slide-num">21 / 21</div>
+  <section class="slide closing" id="close">
+    <div class="slide-num">21 / 31</div>
     <img class="closing-logo" src="icon-512.png" alt="Wrexlyn logo" />
     <h2>Own the control plane for AI work.<br />Choose any model. Keep the evidence.</h2>
     <div class="actions">
-      <a class="btn btn-primary" href="assets/Wrexlyn-Pitch-Deck.pdf" download>Download pitch deck (.pdf)</a>
+      <a class="btn btn-primary" href="getting-started.html">Start with Wrexlyn</a>
+      <a class="btn btn-secondary" href="assets/Wrexlyn-Pitch-Deck.pdf" download>Download NDA deck (.pdf)</a>
       <a class="btn btn-secondary" href="assets/Wrexlyn-Use-Cases.pdf" download>Download use cases (.pdf)</a>
       <a class="btn btn-secondary" href="product-demo.html">Explore the product tour</a>
     </div>
@@ -650,5 +669,21 @@
 
 </div>
 
+<script>
+(() => {
+  const bar = document.querySelector('.deck-progress i');
+  const links = [...document.querySelectorAll('.deck-nav a')];
+  const targets = links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+  const update = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+    let current = targets[0];
+    targets.forEach(target => { if (target.getBoundingClientRect().top < 190) current = target; });
+    links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${current.id}`));
+  };
+  addEventListener('scroll', update, { passive: true });
+  update();
+})();
+</script>
 </body>
 </html>
