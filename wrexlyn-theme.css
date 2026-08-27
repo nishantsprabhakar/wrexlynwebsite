@@ -1,0 +1,171 @@
+:root{
+  --wx-bg:#06100d;
+  --wx-bg-deep:#030806;
+  --wx-surface:rgba(11,24,19,.82);
+  --wx-surface-strong:#0b1813;
+  --wx-line:rgba(150,255,215,.15);
+  --wx-line-hot:rgba(99,247,194,.42);
+  --wx-mint:#63f7c2;
+  --wx-text:#f4fff9;
+  --wx-muted:#91a59c;
+  --wx-shadow:0 32px 80px rgba(0,0,0,.34);
+}
+/* Normalize legacy page tokens. The double :root specificity also overrides
+   old per-page light/theme selectors while this public site uses one identity. */
+:root:root{
+  --bg:#06100d;
+  --surface:#0b1813;
+  --surface-2:#10231b;
+  --panel:#0b1813;
+  --panel2:#10231b;
+  --line:rgba(150,255,215,.15);
+  --line-soft:rgba(150,255,215,.09);
+  --border:rgba(150,255,215,.15);
+  --border-soft:rgba(150,255,215,.09);
+  --ink:#f4fff9;
+  --ink-dim:#a8bbb3;
+  --ink-faint:#758b81;
+  --text:#f4fff9;
+  --text-dim:#a8bbb3;
+  --text-faint:#758b81;
+  --muted:#91a59c;
+  --accent:#63f7c2;
+  --accent-rgb:99,247,194;
+  --accent-soft:rgba(99,247,194,.12);
+  --accent-dim:rgba(99,247,194,.12);
+  --accent-2:#78b7ff;
+  --mint:#63f7c2;
+}
+html{background:var(--wx-bg-deep);color-scheme:dark}
+body.wrexlyn-site{
+  min-height:100vh;
+  color:var(--wx-text);
+  background:
+    radial-gradient(900px 620px at 78% -12%,rgba(61,217,163,.13),transparent 64%),
+    radial-gradient(700px 520px at -10% 38%,rgba(25,113,85,.08),transparent 68%),
+    linear-gradient(rgba(144,255,213,.018) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(144,255,213,.018) 1px,transparent 1px),
+    linear-gradient(180deg,var(--wx-bg-deep),var(--wx-bg) 42%,#040b08) !important;
+  background-size:auto,auto,48px 48px,48px 48px,auto !important;
+  background-attachment:fixed !important;
+}
+body.wrexlyn-site ::selection{background:var(--wx-mint);color:#04100b}
+body.wrexlyn-site :focus-visible{outline:2px solid var(--wx-mint);outline-offset:4px}
+body.wrexlyn-site::-webkit-scrollbar{width:10px;height:10px}
+body.wrexlyn-site::-webkit-scrollbar-track{background:var(--wx-bg-deep)}
+body.wrexlyn-site::-webkit-scrollbar-thumb{background:#1e4a3a;border:2px solid var(--wx-bg-deep)}
+body.wrexlyn-site::-webkit-scrollbar-thumb:hover{background:var(--wx-mint)}
+
+/* One navigation surface across every route. */
+body.wrexlyn-site > .topbar,
+body.wrexlyn-site > header.topbar,
+body.wrexlyn-site > header.shell,
+body.wrexlyn-site main > .nav,
+body.wrexlyn-site > main > .nav{
+  border-color:var(--wx-line) !important;
+  background:linear-gradient(180deg,rgba(4,11,8,.94),rgba(5,14,11,.82)) !important;
+  backdrop-filter:blur(18px) saturate(125%);
+  -webkit-backdrop-filter:blur(18px) saturate(125%);
+  box-shadow:0 12px 42px rgba(0,0,0,.18);
+}
+body.wrexlyn-site .brand-logo,
+body.wrexlyn-site .brand img,
+body.wrexlyn-site .hero-logo,
+body.wrexlyn-site .closing-logo{
+  filter:drop-shadow(0 0 16px rgba(99,247,194,.4)) !important;
+}
+body.wrexlyn-site h1,
+body.wrexlyn-site h2,
+body.wrexlyn-site h3{color:var(--wx-text);text-wrap:balance}
+body.wrexlyn-site h1{filter:drop-shadow(0 16px 40px rgba(0,0,0,.2))}
+body.wrexlyn-site p{max-width:75ch}
+
+/* Shared premium surface language, while retaining each page's layout. */
+body.wrexlyn-site .card,
+body.wrexlyn-site .stepCard,
+body.wrexlyn-site .featureGrid article,
+body.wrexlyn-site .entryGrid article,
+body.wrexlyn-site .evidenceGrid article,
+body.wrexlyn-site .principleGrid article,
+body.wrexlyn-site .briefMatrix article{
+  border-color:var(--wx-line) !important;
+  background:linear-gradient(145deg,rgba(14,31,25,.88),rgba(5,14,10,.7)) !important;
+  box-shadow:inset 0 1px rgba(255,255,255,.018);
+}
+body.wrexlyn-site .card,
+body.wrexlyn-site .stepCard,
+body.wrexlyn-site .featureGrid article,
+body.wrexlyn-site .entryGrid article{
+  transition:transform .24s ease,border-color .24s ease,box-shadow .24s ease;
+}
+body.wrexlyn-site .card:hover,
+body.wrexlyn-site .stepCard:hover,
+body.wrexlyn-site .featureGrid article:hover,
+body.wrexlyn-site .entryGrid article:hover{
+  transform:translateY(-4px);
+  border-color:var(--wx-line-hot) !important;
+  box-shadow:var(--wx-shadow);
+}
+body.wrexlyn-site .button,
+body.wrexlyn-site .btn,
+body.wrexlyn-site .primary,
+body.wrexlyn-site .navcta,
+body.wrexlyn-site .dl-btn{
+  transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease;
+}
+body.wrexlyn-site .button:hover,
+body.wrexlyn-site .btn:hover,
+body.wrexlyn-site .primary:hover,
+body.wrexlyn-site .navcta:hover,
+body.wrexlyn-site .dl-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 42px rgba(58,230,168,.16);
+}
+
+/* Remove isolated light/color blocks so every page remains in the Wrexlyn universe. */
+body.wrexlyn-site .controlPlane,
+body.wrexlyn-site .freedom,
+body.wrexlyn-site .principles{
+  color:var(--wx-text) !important;
+  background:linear-gradient(135deg,rgba(10,28,21,.96),rgba(5,14,10,.96)) !important;
+  border-color:var(--wx-line) !important;
+}
+body.wrexlyn-site .controlPlane p,
+body.wrexlyn-site .freedom p,
+body.wrexlyn-site .principles p{color:var(--wx-muted) !important}
+body.wrexlyn-site .controlPlane .sectionTag,
+body.wrexlyn-site .freedom .sectionTag{color:var(--wx-mint) !important}
+body.wrexlyn-site .controlPlane h2 span,
+body.wrexlyn-site .freedom h2 span{-webkit-text-stroke-color:var(--wx-mint) !important}
+body.wrexlyn-site .boundaryMap{background:rgba(238,255,247,.035) !important;border-color:var(--wx-line) !important;box-shadow:var(--wx-shadow)}
+body.wrexlyn-site .boundaryTop,
+body.wrexlyn-site .boundaryFoot{color:#8ca198 !important}
+body.wrexlyn-site .boundaryNodes span{border-color:var(--wx-line) !important;color:#b5c8c0}
+
+/* A quiet route signature makes every standalone page unmistakably Wrexlyn. */
+body.wrexlyn-site::after{
+  content:"WREXLYN  /  GOVERNED EXECUTION  /  VERIFIED OUTCOMES";
+  position:fixed;
+  z-index:80;
+  right:14px;
+  bottom:12px;
+  padding:7px 9px;
+  color:rgba(160,205,187,.46);
+  background:rgba(3,9,7,.7);
+  border:1px solid rgba(99,247,194,.1);
+  backdrop-filter:blur(8px);
+  font:700 7px/1 ui-monospace,"Cascadia Code",monospace;
+  letter-spacing:.13em;
+  pointer-events:none;
+}
+@media(max-width:700px){
+  body.wrexlyn-site{background-size:auto,auto,34px 34px,34px 34px,auto !important}
+  body.wrexlyn-site::after{display:none}
+  body.wrexlyn-site .card:hover,
+  body.wrexlyn-site .stepCard:hover,
+  body.wrexlyn-site .featureGrid article:hover,
+  body.wrexlyn-site .entryGrid article:hover{transform:none;box-shadow:none}
+}
+@media(prefers-reduced-motion:reduce){
+  body.wrexlyn-site *,body.wrexlyn-site *::before,body.wrexlyn-site *::after{scroll-behavior:auto !important;animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+}
