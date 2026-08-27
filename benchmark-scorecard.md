@@ -58,7 +58,7 @@ Best-of-N execution uses real Git worktrees. Candidate agents do not share inter
 
 ## Why Wrexlyn does not score higher yet
 
-1. **No published external task score.** Architecture cannot substitute for SWE-bench Verified, Terminal-Bench 2 or SWE-Lancer results.
+1. **No published external task score.** Architecture cannot substitute for SWE-bench Verified, Terminal-Bench 2 or SWE-Lancer results. A SWE-bench Verified adapter has since been designed against the real, live 500-instance dataset (confirmed fetchable, not assumed); execution is blocked on Python/Docker infrastructure that has not been provisioned, not on scope or design work.
 2. **No same-model ablation.** Wrexlyn must show that its critic, verification and Best-of-N modes improve results compared with the same base model using a minimal agent loop.
 3. **Limited production proof.** There are no disclosed active users, retention cohorts, enterprise deployments or large-repository case studies.
 4. **Enterprise deployment is intentionally local-first.** Phase 12 preserves customer custody rather than adding a mandatory Wrexlyn-hosted control plane. Buyers requiring centralized SaaS administration must evaluate customer-hosted or opt-in coordination against their own identity and compliance requirements.

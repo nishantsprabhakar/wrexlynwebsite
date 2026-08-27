@@ -513,6 +513,7 @@
       <div class="callout warn"><strong>Current evidence boundary.</strong> The product contains the architecture required to run these evaluations and automated tests covering its internal mechanisms. The 81/100 peer score is an analyst capability/readiness assessment, not task accuracy. Wrexlyn should claim leaderboard performance only after model-pinned runs on official, unmodified harnesses are published with reproducible traces.</div>
       <div class="prose" style="margin-top:20px;">
         <p><strong>Recommended external sequence:</strong> start with a private 25-task customer pilot; publish same-model ablations on recovery and verification; then run SWE-bench Verified, Terminal-Bench 2, BFCL and economically grounded task sets such as SWE-Lancer. This order establishes customer value before spending heavily on broad leaderboard coverage.</p>
+        <p><strong>Where SWE-bench Verified actually stands:</strong> an adapter has been designed against the real, live 500-instance dataset &mdash; confirmed reachable and fetchable, not assumed. Running it end to end needs Python and Docker infrastructure that hasn&rsquo;t been provisioned yet; that is the actual blocker, not open design questions. No score is claimed or implied until a real run against the official harness produces one.</p>
       </div>
     </section>
 
