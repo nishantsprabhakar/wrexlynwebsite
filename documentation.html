@@ -233,7 +233,7 @@
     .shot.shot-portrait { width: min(64vw, 210px); }
   }
 </style>
-<link rel="stylesheet" href="wrexlyn-theme.css?v=20260827c" />
+<link rel="stylesheet" href="wrexlyn-theme.css?v=20260828" />
 </head>
 <body class="wrexlyn-site documentation-page">
 
@@ -277,7 +277,7 @@
       <a class="navlink" href="#differentiation"><span class="num">11</span>Why the skills library is differentiated</a>
       <a class="navlink" href="#quality-gate"><span class="num">12</span>Document quality gate</a>
       <a class="navlink" href="#self-learning"><span class="num">13</span>Self-learning</a>
-      <a class="navlink" href="#convergence"><span class="num">14</span>The Nishant Convergence Protocol</a>
+<a class="navlink" href="#convergence"><span class="num">14</span>Proprietary Convergence Protocol</a>
       <a class="navlink" href="#positioning"><span class="num">15</span>Competitive positioning</a>
     </nav>
   </aside>
@@ -286,6 +286,7 @@
     <div class="cover">
       <div class="eyebrow">The local-first Agentic OS</div>
       <h1>Wrexlyn</h1>
+      <p class="brand-owner">NISHANT PRABHAKAR</p>
       <p class="tagline">A terminal-grade Agentic OS with a real desktop UI — that plans, edits, runs, verifies, and repairs its own work before calling anything done, and runs entirely on your own machine against a model you choose.</p>
       <div class="facts">
         <div><div class="fact-label">Runtime</div><div class="fact-value">Node.js, local process</div></div>
@@ -316,7 +317,7 @@
         <div class="card"><h3><span class="tick">01</span>Understand before acting</h3><p>Repository structure, ranked lexical search, extracted symbols and Git history narrow the working set. The agent inspects relevant code instead of inferring an architecture from filenames or a partial prompt.</p></div>
         <div class="card"><h3><span class="tick">02</span>Control every mutation</h3><p>Typed tools, path validation, action-risk classification, explicit permission policy and pre-change snapshots create a visible boundary between model reasoning and effects on the machine.</p></div>
         <div class="card"><h3><span class="tick">03</span>Prove completion</h3><p>Configured builds, tests and lint checks generate a six-state outcome. For non-code deliverables, deterministic structural gates inspect the artifact that will actually be delivered.</p></div>
-        <div class="card"><h3><span class="tick">04</span>Recover deliberately</h3><p>Independent critique, bounded repairs, recurrence detection and the Nishant Convergence Protocol replace infinite retries with a finite, evidence-driven recovery process.</p></div>
+        <div class="card"><h3><span class="tick">04</span>Recover deliberately</h3><p>Independent critique, bounded repairs, recurrence detection and the Proprietary Convergence Protocol replace infinite retries with a finite, evidence-driven recovery process.</p></div>
         <div class="card"><h3><span class="tick">05</span>Preserve customer choice</h3><p>Built-in providers, any compatible hosted URL and local runtimes such as Ollama or LM Studio share the same execution harness. Models become replaceable infrastructure.</p></div>
         <div class="card"><h3><span class="tick">06</span>Deliver an audit trail</h3><p>Tool activity, evidence, outcome state, confidence, transaction history and rollback data explain what changed, which checks ran and what remains uncertain.</p></div>
       </div>
@@ -508,7 +509,7 @@
           <tr><td class="strong">Task completion</td><td>Resolved rate and pass@1</td><td>Same base model, same task set</td><td>Does the complete system produce correct patches?</td></tr>
           <tr><td class="strong">Verification integrity</td><td>Precision of the verified state</td><td>Wrexlyn outcome versus external grader</td><td>Can a reviewer trust the completion label?</td></tr>
           <tr><td class="strong">Regression control</td><td>Previously passing checks broken</td><td>Patch-only agent versus V-Cycle</td><td>Does verification prevent locally correct but globally harmful changes?</td></tr>
-          <tr><td class="strong">Recovery uplift</td><td>Success after first failure</td><td>Plain retry versus critic, NCP and Best-of-N</td><td>Does proprietary orchestration add value beyond the model?</td></tr>
+<tr><td class="strong">Recovery uplift</td><td>Success after first failure</td><td>Plain retry versus critic, proprietary convergence and Best-of-N</td><td>Does proprietary orchestration add value beyond the model?</td></tr>
           <tr><td class="strong">Operational safety</td><td>Unsafe actions proposed, blocked and executed</td><td>Policy enabled versus disabled</td><td>Can autonomy operate inside an acceptable risk envelope?</td></tr>
           <tr><td class="strong">Economics</td><td>Cost and time per verified result</td><td>Frontier, low-cost and local model tiers</td><td>Which deployment produces the best accepted-work economics?</td></tr>
         </table>
@@ -619,20 +620,20 @@
     </section>
 
     <section class="chapter" id="convergence">
-      <div class="chapter-head"><span class="chapter-num">14</span><h2>The Nishant Convergence Protocol</h2></div>
+      <div class="chapter-head"><span class="chapter-num">14</span><h2>Proprietary Convergence Protocol</h2></div>
       <div class="prose">
-        <p class="lede">A weak or free model is rarely bad at writing a first attempt. It is bad at self-correcting when that attempt fails &mdash; given a generic &ldquo;fix the root cause and try again,&rdquo; it disproportionately repeats a near-identical change or thrashes to something unrelated. The Nishant Convergence Protocol (NCP) targets exactly that moment, formalized as a named, versioned, unit-tested algorithm rather than a loose heuristic.</p>
-        <p>Said plainly, upfront: NCP does not make a small model reason like a large one. No runtime layer manufactures capability the underlying weights don&rsquo;t have. What it closes is the <em>reliability</em> gap on tasks with an external check &mdash; a build, a test, a structural document rule &mdash; the same category &sect;02&rsquo;s reliability runtime already operates on. It is the mechanism that makes that runtime&rsquo;s repair step measurably smarter, not a claim of raw intelligence uplift.</p>
+      <p class="lede">A weak or free model is rarely bad at writing a first attempt. It is bad at self-correcting when that attempt fails &mdash; given a generic &ldquo;fix the root cause and try again,&rdquo; it disproportionately repeats a near-identical change or thrashes to something unrelated. The Proprietary Convergence Protocol targets exactly that moment, formalized as a named, versioned, unit-tested algorithm rather than a loose heuristic.</p>
+      <p>Said plainly, upfront: the protocol does not make a small model reason like a large one. No runtime layer manufactures capability the underlying weights don&rsquo;t have. What it closes is the <em>reliability</em> gap on tasks with an external check &mdash; a build, a test, a structural document rule &mdash; the same category &sect;02&rsquo;s reliability runtime already operates on. It is the mechanism that makes that runtime&rsquo;s repair step measurably smarter, not a claim of raw intelligence uplift.</p>
       </div>
       <div class="stepline">
         <div class="step"><span class="idx">01</span><div class="body"><h4>Divergent diagnosis ensemble</h4><p>Once a plain repair attempt has already failed once, two independently-framed root-cause diagnoses are generated in parallel from the same failure evidence &mdash; one biased toward the obvious cause, one explicitly asked to look past it for a side effect or stale assumption.</p></div></div>
         <div class="step"><span class="idx">02</span><div class="body"><h4>Pairwise adjudication</h4><p>A dedicated comparative call judges the two diagnoses against each other rather than scoring either in isolation &mdash; a measurably more reliable judgment for an LLM to make &mdash; and returns a winner plus a margin: clear or close.</p></div></div>
         <div class="step"><span class="idx">03</span><div class="body"><h4>Lesson-steered regeneration</h4><p>The project&rsquo;s learned lessons (&sect;13) are ranked by keyword-overlap relevance to the current failure and foregrounded directly inside both diagnosis prompts as explicit constraints &mdash; the first mechanism to actively retrieve self-learned lessons rather than leave them as passive system-prompt context.</p></div></div>
-        <div class="step"><span class="idx">04</span><div class="body"><h4>Formalized convergence score</h4><p>A bounded scoring adjustment weighs repair rounds spent, whether the ensemble reached a clear adjudicated winner, and whether a previously-learned failure recurred anyway. On the common case &mdash; zero repair rounds, NCP never invoked &mdash; it returns the existing outcome-based score completely unchanged; it&rsquo;s a strict refinement, not a replacement.</p></div></div>
+        <div class="step"><span class="idx">04</span><div class="body"><h4>Formalized convergence score</h4><p>A bounded scoring adjustment weighs repair rounds spent, whether the ensemble reached a clear adjudicated winner, and whether a previously-learned failure recurred anyway. On the common case &mdash; zero repair rounds, with the protocol never invoked &mdash; it returns the existing outcome-based score completely unchanged; it&rsquo;s a strict refinement, not a replacement.</p></div></div>
       </div>
-      <div class="callout warn"><strong>Adaptive, not blanket.</strong> The ensemble only engages once a first, single-shot repair attempt has already failed (repair attempt 2 of the existing 3-round ceiling). Most repairs succeed on the first try; spending three extra model calls on every one of them would be a direct cost and rate-limit regression, working against the retry/backoff efficiency work described elsewhere in this document. NCP spends its extra compute only once a turn has already proven itself stuck &mdash; exactly where the marginal value of a second opinion is highest and the frequency of that moment is naturally low.</div>
+      <div class="callout warn"><strong>Adaptive, not blanket.</strong> The ensemble only engages once a first, single-shot repair attempt has already failed (repair attempt 2 of the existing 3-round ceiling). Most repairs succeed on the first try; spending three extra model calls on every one of them would be a direct cost and rate-limit regression, working against the retry/backoff efficiency work described elsewhere in this document. The protocol spends its extra compute only once a turn has already proven itself stuck &mdash; exactly where the marginal value of a second opinion is highest and the frequency of that moment is naturally low.</div>
       <div class="prose" style="margin-top:20px;">
-        <p class="dim">All four pure functions underlying NCP &mdash; the relevance ranker, the recurrence check, the score formula, and the ensemble orchestrator itself &mdash; are covered by unit tests against a mocked model backend, including the fail-open path when a provider is unavailable. Full methodology, formal scoring derivation, and the acquisition-relevant IP framing are documented separately as a private technical whitepaper, available for review under NDA.</p>
+      <p class="dim">All four pure functions underlying the Proprietary Convergence Protocol &mdash; the relevance ranker, the recurrence check, the score formula, and the ensemble orchestrator itself &mdash; are covered by unit tests against a mocked model backend, including the fail-open path when a provider is unavailable. Full methodology, formal scoring derivation, and the acquisition-relevant IP framing are documented separately as a private technical whitepaper, available for review under NDA.</p>
       </div>
     </section>
 
@@ -647,7 +648,7 @@
           <tr><td class="strong">Inline autocomplete assistants</td><td>Speed of a single suggestion, in-editor</td><td>No multi-file planning, no verification loop, no memory across sessions</td><td class="yes">A full agent loop with its own risk-gating and repair &mdash; a different tier of task, not a faster version of the same one</td></tr>
           <tr><td class="strong">IDE-embedded agentic assistants</td><td>Convenience &mdash; one tool, one subscription, tied to a specific editor</td><td>Usually a fixed model, usually a subscription regardless of which free tiers exist upstream</td><td class="yes">Editor-agnostic with integrated providers, arbitrary compatible URLs and local model servers (&sect;05)</td></tr>
           <tr><td class="strong">Hosted autonomous SaaS agents</td><td>Fire-and-forget delegation &mdash; describe the task, walk away</td><td>Your code and prompts leave your machine; verification, if any, happens on infrastructure you can't inspect</td><td class="yes">Runs locally; every risk gate, checkpoint and verification result remains inside the customer's controlled environment</td></tr>
-          <tr><td class="strong">Other local/terminal agents</td><td>Also local, also model-agnostic in the better ones &mdash; the closest real comparison</td><td>Typically no independent critique step, no formalized confidence score, no structural gate on generated documents</td><td class="yes">V-Cycle&rsquo;s independent critic (&sect;02), the document quality gate (&sect;12), and the Nishant Convergence Protocol (&sect;14) are the specific, checkable things that differ, not a general claim of being &ldquo;better&rdquo;</td></tr>
+<tr><td class="strong">Other local/terminal agents</td><td>Also local, also model-agnostic in the better ones &mdash; the closest real comparison</td><td>Typically no independent critique step, no formalized confidence score, no structural gate on generated documents</td><td class="yes">V-Cycle&rsquo;s independent critic (&sect;02), the document quality gate (&sect;12), and the Proprietary Convergence Protocol (&sect;14) are the specific, checkable things that differ, not a general claim of being &ldquo;better&rdquo;</td></tr>
         </table>
       </div>
       <div class="prose" style="margin-top:20px;">
@@ -660,7 +661,7 @@
         </div>
         <div class="card">
           <h3><span class="tick">&check;</span>Named, versioned mechanisms</h3>
-          <p>&ldquo;The V-Cycle runtime,&rdquo; &ldquo;the document quality gate,&rdquo; &ldquo;the Nishant Convergence Protocol&rdquo; are specific, citable names for specific pieces of code &mdash; not a marketing umbrella over whatever the model happened to do that day.</p>
+      <p>&ldquo;The V-Cycle runtime,&rdquo; &ldquo;the document quality gate,&rdquo; and &ldquo;the Proprietary Convergence Protocol&rdquo; are specific, citable names for specific pieces of code &mdash; not a marketing umbrella over whatever the model happened to do that day.</p>
         </div>
         <div class="card">
           <h3><span class="tick">&check;</span>Disclosed limits, not just wins</h3>

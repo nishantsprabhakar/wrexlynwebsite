@@ -255,11 +255,25 @@ body.wrexlyn-site .sidebar-header img{width:34px !important;height:34px !importa
 body.wrexlyn-site .topbar-logo{width:34px;height:34px;object-fit:contain;filter:drop-shadow(0 0 14px rgba(99,247,194,.4))}
 body.wrexlyn-site .sidebar-header .logo-text-group b{font-size:14px;letter-spacing:.12em}
 body.wrexlyn-site .sidebar-header .logo-text-group small{font-size:11px !important;color:#a7bbb2}
+.brand-owner{
+  margin:10px 0 0 !important;
+  color:var(--wx-mint) !important;
+  font:800 16px/1.25 ui-monospace,"Cascadia Code",monospace !important;
+  letter-spacing:.18em !important;
+  text-transform:uppercase;
+  text-shadow:0 0 20px rgba(99,247,194,.2);
+}
+.creatorLine.brand-owner{font-size:0 !important;margin-top:16px !important}
+.creatorLine.brand-owner strong{color:var(--wx-mint);font-size:18px !important;letter-spacing:.2em}
+.hero-brand>div{min-width:0}
+body.documentation-page .cover .brand-owner{margin-top:0 !important;margin-bottom:8px !important}
 
 @media(max-width:700px){
   :root:root{--wx-nav-size:12px;--wx-body-size:16px;--wx-small-size:12px;--wx-h1-size:clamp(44px,13vw,60px);--wx-h2-size:clamp(34px,10vw,52px);--wx-h3-size:clamp(20px,6vw,26px)}
   body.wrexlyn-site :is(.brand-logo,.brand img,.rail-mark img,.mobile-brand img){width:30px !important;height:30px !important;flex-basis:30px}
   body.wrexlyn-site .topbar-logo{width:30px;height:30px}
+  .brand-owner{font-size:13px !important;letter-spacing:.14em !important}
+  .creatorLine.brand-owner strong{font-size:13px !important;letter-spacing:.15em}
   body.wrexlyn-site :is(.hero-logo,.closing-logo){width:62px !important;height:62px !important}
   body.wrexlyn-site .provider{min-width:96px;padding:13px 12px !important;font-size:11px !important}
   body.wrexlyn-site .core{width:120px;height:120px}
