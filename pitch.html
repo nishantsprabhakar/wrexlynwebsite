@@ -66,6 +66,8 @@
   .pitch-thesis { width:100%; max-width:860px; display:grid; grid-template-columns:1fr auto; gap:24px; align-items:center; margin-top:26px; padding:17px 19px; border:1px solid rgba(51,224,168,.24); background:linear-gradient(90deg,rgba(51,224,168,.08),rgba(51,224,168,.015)); }
   .pitch-thesis strong { color:#fff; font-family:var(--mono); font-size:12px; letter-spacing:.04em; }
   .pitch-thesis span { color:var(--accent); font:700 9px var(--mono); letter-spacing:.12em; white-space:nowrap; }
+  .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:22px; }
+  .hero-actions .btn { min-width:168px; text-align:center; }
   .deck-nav { position:sticky; top:58px; z-index:4; display:flex; justify-content:center; gap:4px; padding:8px 14px; overflow-x:auto; background:rgba(8,13,15,.9); border-bottom:1px solid var(--line-soft); backdrop-filter:blur(14px); scrollbar-width:none; }
   .deck-nav::-webkit-scrollbar{display:none}.deck-nav a{flex:0 0 auto;padding:7px 11px;color:var(--ink-faint);font:700 9px var(--mono);letter-spacing:.09em;text-decoration:none;border:1px solid transparent}.deck-nav a:hover,.deck-nav a.active{color:var(--accent);border-color:rgba(51,224,168,.24);background:var(--accent-dim)}
   .deck-progress{position:fixed;top:0;left:0;width:100%;height:2px;z-index:10}.deck-progress i{display:block;height:100%;background:var(--accent);box-shadow:0 0 16px var(--accent);transform-origin:left;transform:scaleX(0)}
@@ -182,7 +184,7 @@
     <div class="slide-num">01 / 31</div>
     <div class="hero-kicker">The local-first Agentic OS</div>
     <div class="hero-brand"><img class="hero-logo" src="icon-512.png" alt="Wrexlyn logo" /><div><h1>WREXLYN</h1><p class="brand-owner">NISHANT PRABHAKAR</p></div></div>
-    <p class="sub"><strong style="color:#fff">Models generate. Wrexlyn delivers.</strong> Turn any compatible LLM into a governed execution system that understands the workspace, acts within policy, proves its work and recovers when it fails. One proprietary kernel. Swappable intelligence. Compounding vertical products.</p>
+    <p class="sub"><strong style="color:#fff">Models generate. Wrexlyn delivers verified work.</strong> Give engineering and knowledge teams one customer-controlled execution layer that understands the workspace, governs every action, proves the result and recovers from failure—across hosted, custom and fully local models.</p>
     <div class="proof-strip">
       <div class="proof"><strong>6 states</strong><span>objective verification outcomes</span></div>
       <div class="proof"><strong>Best-of-N</strong><span>isolated Git worktree candidates</span></div>
@@ -190,6 +192,7 @@
       <div class="proof"><strong>Local-first</strong><span>code, evidence and controls stay with you</span></div>
     </div>
     <div class="pitch-thesis"><strong>The enduring asset is not the model. It is the governed system that turns intelligence into accountable outcomes.</strong><span>THE WREXLYN THESIS →</span></div>
+    <div class="hero-actions"><a class="btn btn-primary" href="#pilot">See the proof engagement</a><a class="btn btn-secondary" href="product-demo.html">Explore the product</a></div>
   </section>
 
   <section class="slide" id="problem">
@@ -263,9 +266,30 @@
     <p class="dim">The commercial promise is testable: ship more accepted work per engineering hour while preserving customer control over code, models and evidence. No productivity percentage is claimed until a customer pilot establishes it.</p>
   </section>
 
-  <section class="slide" id="proof">
+  <section class="slide" id="pilot">
     <div class="slide-num">03C / 31</div>
-    <h2>Technical capability mapped to the benchmarks buyers recognize</h2>
+    <h2>Prove value in 30 days—inside the customer's own environment</h2>
+    <p class="dim">The first buyer is an engineering, automation or knowledge-work leader who wants greater AI autonomy but cannot trade away code custody, model choice or review control. Wrexlyn begins with one consequential, repeatable workflow—not an enterprise-wide transformation promise.</p>
+    <div class="cols">
+      <div>
+        <h3 class="accent">A bounded proof engagement</h3>
+        <div class="col-step"><span class="n">01</span><p><strong>Baseline</strong> — select 25 representative tasks and record completion, review time, regressions, latency and cost using the current process</p></div>
+        <div class="col-step"><span class="n">02</span><p><strong>Configure</strong> — connect the chosen model, repository or workspace, verification commands, permissions and evidence requirements</p></div>
+        <div class="col-step"><span class="n">03</span><p><strong>Run</strong> — execute the same task class through Wrexlyn with complete traces, outcome states and rollback protection</p></div>
+      </div>
+      <div>
+        <h3 class="accent">Decision-ready output</h3>
+        <div class="col-step"><span class="n">A</span><p><strong>Adopt</strong> when accepted-task rate rises without increasing regression or unsafe-action rates</p></div>
+        <div class="col-step"><span class="n">B</span><p><strong>Expand</strong> when review minutes and cost per verified outcome improve against the baseline</p></div>
+        <div class="col-step"><span class="n">C</span><p><strong>Stop</strong> when the evidence does not support deployment—no vanity metric substitutes for customer acceptance</p></div>
+      </div>
+    </div>
+    <p class="dim"><strong>Deliverable:</strong> a model-pinned scorecard, task-level evidence package, failure analysis and rollout recommendation the buyer can audit. Commercial terms are scoped privately to deployment, support and workflow complexity.</p>
+  </section>
+
+  <section class="slide" id="proof">
+    <div class="slide-num">03D / 31</div>
+    <h2>Benchmark the system buyers deploy—not just the model underneath</h2>
     <div class="table-wrap">
       <table>
         <tr><th>Industry benchmark</th><th>What it measures</th><th>Wrexlyn capability under test</th><th>Commercial meaning</th></tr>
@@ -275,7 +299,7 @@
         <tr><td class="strong">SWE-Lancer</td><td>More than 1,400 real freelance engineering tasks with approximately $1 million of historical economic value</td><td class="yes">End-to-end feature work, repository modification, verification evidence, professional artifacts and auditable delivery</td><td>Can it complete work customers have demonstrably paid engineers to perform?</td></tr>
       </table>
     </div>
-    <p class="dim">These are the correct external scoreboards for Wrexlyn. Architectural coverage is implemented; leaderboard performance must be published only after reproducible, model-pinned runs. Sources: <a href="https://openai.com/index/introducing-swe-bench-verified/" target="_blank" rel="noopener">SWE-bench Verified</a>, <a href="https://github.com/harbor-framework/terminal-bench-2" target="_blank" rel="noopener">Terminal-Bench 2</a>, <a href="https://gorilla.cs.berkeley.edu/leaderboard" target="_blank" rel="noopener">BFCL</a>, <a href="https://swelancer.github.io/leaderboard/" target="_blank" rel="noopener">SWE-Lancer</a>.</p>
+    <p class="dim"><strong>Claim discipline:</strong> the capabilities mapped above are implemented; they are not presented as leaderboard scores. External performance will be published only from reproducible, model-pinned runs with the harness, cost, traces and failures disclosed. Sources: <a href="https://openai.com/index/introducing-swe-bench-verified/" target="_blank" rel="noopener">SWE-bench Verified</a>, <a href="https://github.com/harbor-framework/terminal-bench-2" target="_blank" rel="noopener">Terminal-Bench 2</a>, <a href="https://gorilla.cs.berkeley.edu/leaderboard" target="_blank" rel="noopener">BFCL</a>, <a href="https://swelancer.github.io/leaderboard/" target="_blank" rel="noopener">SWE-Lancer</a>.</p>
   </section>
 
   <section class="slide">
@@ -663,9 +687,11 @@
   <section class="slide closing" id="close">
     <div class="slide-num">21 / 31</div>
     <img class="closing-logo" src="icon-512.png" alt="Wrexlyn logo" />
-    <h2>Own the control plane for AI work.<br />Choose any model. Keep the evidence.</h2>
+    <h2>Turn one real workflow into verified delivery capacity—in 30 days.</h2>
+    <p class="dim" style="max-width:720px;margin:0 auto;">Bring the tasks, acceptance standard and model constraints. Wrexlyn brings governed execution, objective verification, recovery and an evidence package your team can inspect.</p>
     <div class="actions">
-      <a class="btn btn-primary" href="getting-started.html">Start with Wrexlyn</a>
+      <a class="btn btn-primary" href="#pilot">Design the proof engagement</a>
+      <a class="btn btn-secondary" href="getting-started.html">Evaluate Wrexlyn</a>
       <a class="btn btn-secondary" href="assets/Wrexlyn-Pitch-Deck.pdf" download>Download NDA deck (.pdf)</a>
       <a class="btn btn-secondary" href="assets/Wrexlyn-Use-Cases.pdf" download>Download use cases (.pdf)</a>
       <a class="btn btn-secondary" href="product-demo.html">Explore the product tour</a>
