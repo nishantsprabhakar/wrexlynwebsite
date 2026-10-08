@@ -1,0 +1,175 @@
+{
+  "source": "ab-1791355010163.json",
+  "kind": "ab",
+  "generatedAt": "2026-10-07T06:36:50.163Z",
+  "provider": "kilo",
+  "model": "poolside/laguna-s-2.1:free",
+  "repeats": 3,
+  "taskCount": 12,
+  "grader": "original test.js restored, then `node test.js` must exit 0 (same for both arms)",
+  "node": "v24.18.0",
+  "platform": "win32 10.0.26200",
+  "arms": [
+    {
+      "arm": "baseline",
+      "runs": 36,
+      "passed": 36,
+      "passRate": 1,
+      "ci95": [
+        0.9035781695514236,
+        1
+      ],
+      "errors": 0,
+      "medianSeconds": 11,
+      "byDifficulty": {
+        "easy": {
+          "passed": 12,
+          "runs": 12
+        },
+        "medium": {
+          "passed": 12,
+          "runs": 12
+        },
+        "hard": {
+          "passed": 12,
+          "runs": 12
+        }
+      },
+      "tasksSolvedEveryTime": 12
+    },
+    {
+      "arm": "wrexlyn",
+      "runs": 36,
+      "passed": 36,
+      "passRate": 1,
+      "ci95": [
+        0.9035781695514236,
+        1
+      ],
+      "errors": 0,
+      "medianSeconds": 41,
+      "byDifficulty": {
+        "easy": {
+          "passed": 12,
+          "runs": 12
+        },
+        "medium": {
+          "passed": 12,
+          "runs": 12
+        },
+        "hard": {
+          "passed": 12,
+          "runs": 12
+        }
+      },
+      "tasksSolvedEveryTime": 12
+    }
+  ],
+  "selfCheck": {
+    "saidVerified": 36,
+    "saidVerifiedAndPassed": 36,
+    "flaggedNotVerified": 0,
+    "flaggedAndActuallyFailed": 0,
+    "outcomes": {
+      "verified": 36
+    }
+  },
+  "perTask": [
+    {
+      "taskId": "01-capitalize-words",
+      "title": "Capitalize each word",
+      "difficulty": "easy",
+      "baseline": 3,
+      "wrexlyn": 3,
+      "of": 3
+    },
+    {
+      "taskId": "02-sum-range-inclusive",
+      "title": "Fix off-by-one bug in sumRange",
+      "difficulty": "easy",
+      "baseline": 3,
+      "wrexlyn": 3,
+      "of": 3
+    },
+    {
+      "taskId": "03-validate-email",
+      "title": "Basic email validation",
+      "difficulty": "easy",
+      "baseline": 3,
+      "wrexlyn": 3,
+      "of": 3
+    },
+    {
+      "taskId": "04-unique-values",
+      "title": "Remove duplicates preserving order",
+      "difficulty": "easy",
+      "baseline": 3,
+      "wrexlyn": 3,
+      "of": 3
+    },
+    {
+      "taskId": "05-stack-class",
+      "title": "Implement a Stack class",
+      "difficulty": "medium",
+      "baseline": 3,
+      "wrexlyn": 3,
+      "of": 3
+    },
+    {
+      "taskId": "06-csv-parse",
+      "title": "Parse simple CSV text into objects",
+      "difficulty": "medium",
+      "baseline": 3,
+      "wrexlyn": 3,
+      "of": 3
+    },
+    {
+      "taskId": "07-debounce",
+      "title": "Implement debounce(fn, wait)",
+      "difficulty": "medium",
+      "baseline": 3,
+      "wrexlyn": 3,
+      "of": 3
+    },
+    {
+      "taskId": "08-deep-equal",
+      "title": "Deep equality for plain objects and arrays",
+      "difficulty": "medium",
+      "baseline": 3,
+      "wrexlyn": 3,
+      "of": 3
+    },
+    {
+      "taskId": "09-lru-cache",
+      "title": "Implement an LRU cache",
+      "difficulty": "hard",
+      "baseline": 3,
+      "wrexlyn": 3,
+      "of": 3
+    },
+    {
+      "taskId": "10-expr-eval",
+      "title": "Evaluate a numeric expression string",
+      "difficulty": "hard",
+      "baseline": 3,
+      "wrexlyn": 3,
+      "of": 3
+    },
+    {
+      "taskId": "11-linked-list-reverse",
+      "title": "Reverse a singly linked list",
+      "difficulty": "hard",
+      "baseline": 3,
+      "wrexlyn": 3,
+      "of": 3
+    },
+    {
+      "taskId": "12-sequential-map",
+      "title": "Run async tasks strictly one at a time, in order",
+      "difficulty": "hard",
+      "baseline": 3,
+      "wrexlyn": 3,
+      "of": 3
+    }
+  ]
+}
