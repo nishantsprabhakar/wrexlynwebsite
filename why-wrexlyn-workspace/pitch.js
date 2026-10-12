@@ -189,6 +189,25 @@
     if (stats.classList.contains("in")) starters.stats(); if (chart.classList.contains("in")) starters.chart();
   }).catch(function () { $("#proofNote").textContent = "The measured report couldn't be loaded. Refresh to try again."; });
 
+
+  /* ---------------- vs. the model on its own (deckbench.json, generated from the measured run) ---------------- */
+  var duel = $("#duel");
+  if (duel) fetch(new URL("deckbench.json", HERE).href).then(function (r) { if (!r.ok) throw new Error(); return r.json(); }).then(function (D) {
+    var b = D.base, w = D.wrexlyn, esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+    var tile = function (m) {
+      var max = Math.max(m.b, m.w, 1);
+      return '<div class="dt">' + (m.up ? '<span class="up">' + esc(m.up) + "</span>" : "") + "<h3>" + esc(m.t) + '</h3><p class="why">' + esc(m.why) + "</p>" +
+        '<div class="rowd"><span class="lab">On its own</span><span class="track"><i class="fill a" data-w="' + (m.b / max) * 100 + '"></i></span><span class="val">' + esc(m.bs) + "</span></div>" +
+        '<div class="rowd w"><span class="lab">Wrexlyn</span><span class="track"><i class="fill b" data-w="' + (m.w / max) * 100 + '"></i></span><span class="val">' + esc(m.ws) + "</span></div></div>";
+    };
+    duel.innerHTML = D.metrics.map(tile).join("");
+    starters.duel = function () { duel.classList.add("in"); $$(".fill", duel).forEach(function (f) { f.style.width = f.dataset.w + "%"; }); };
+    if (duel.classList.contains("in")) starters.duel();
+    var d = new Date(D.generatedAt);
+    $("#vsNote").textContent = "Run on " + d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }) + ": " + D.method;
+  }).catch(function () { $("#vsNote").textContent = "The measured comparison couldn't be loaded. Refresh to try again."; });
+  if (duel) watch(duel);
+
   // ids for the sections whose animation starts on first view
   if (stats) { stats.id = "stats"; watch(stats); }
   var ch = $("#chart"); if (ch) watch(ch);
