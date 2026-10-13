@@ -1,14 +1,76 @@
 {
  "generatedAt": "2026-10-12T00:00:00.000Z",
  "briefs": 8,
- "base": { "slides": 84, "wordsPerSlide": 84, "overloaded": 6, "infographics": 0, "finishedFiles": 0, "avgSec": 38.8, "figuresNotInBrief": 0 },
- "wrexlyn": { "slides": 71, "wordsPerSlide": 57, "overloaded": 0, "infographics": 52, "finishedFiles": 8, "avgSec": 31.8, "figuresNotInBrief": 0, "layoutIssues": 0 },
+ "base": {
+  "slides": 84,
+  "wordsPerSlide": 84,
+  "overloaded": 6,
+  "infographics": 0,
+  "finishedFiles": 0,
+  "avgSec": 38.8,
+  "figuresNotInBrief": 0
+ },
+ "wrexlyn": {
+  "slides": 71,
+  "wordsPerSlide": 57,
+  "overloaded": 0,
+  "infographics": 52,
+  "finishedFiles": 8,
+  "avgSec": 31.8,
+  "figuresNotInBrief": 0,
+  "layoutIssues": 0
+ },
  "metrics": [
-  { "t": "Charts, stat tiles and infographics", "why": "Slides that show the numbers instead of listing them", "b": 0, "w": 52, "bs": "0 of 84", "ws": "52 of 71", "up": "73% of slides" },
-  { "t": "Text per slide", "why": "Average words on a slide: less to read, more to see", "b": 84, "w": 57, "bs": "84 words", "ws": "57 words", "up": "−32%" },
-  { "t": "Overloaded slides", "why": "Slides with more than five bullets", "b": 6, "w": 0, "bs": "6", "ws": "0", "up": "6 → 0" },
-  { "t": "Finished, fit-checked deck", "why": "A designed file where every slide passed the layout checks", "b": 0, "w": 8, "bs": "0 of 8", "ws": "8 of 8", "up": "8 of 8" },
-  { "t": "Time to a deck", "why": "Average seconds per brief (shorter is better)", "b": 38.8, "w": 31.8, "bs": "39 s", "ws": "32 s", "up": "18% faster" }
+  {
+   "t": "Visual slides",
+   "why": "Share of slides with charts, stat tiles or infographics",
+   "b": 0,
+   "w": 73,
+   "bs": "0%",
+   "ws": "73%",
+   "up": "+73 pts",
+   "upNote": "of slides are visual: 0% → 73%"
+  },
+  {
+   "t": "Text per slide",
+   "why": "Average words on a slide (fewer is better)",
+   "b": 84,
+   "w": 57,
+   "bs": "84 words",
+   "ws": "57 words",
+   "up": "32%",
+   "upNote": "less text per slide: 84 → 57 words"
+  },
+  {
+   "t": "Overloaded slides",
+   "why": "Share of slides with more than five bullets",
+   "b": 7,
+   "w": 0,
+   "bs": "7%",
+   "ws": "0%",
+   "up": "100%",
+   "upNote": "fewer overloaded slides: 7% → 0%"
+  },
+  {
+   "t": "Ready-to-send decks",
+   "why": "Designed files where every slide passed the layout checks",
+   "b": 0,
+   "w": 100,
+   "bs": "0%",
+   "ws": "100%",
+   "up": "+100 pts",
+   "upNote": "of decks ready to send: 0% → 100%"
+  },
+  {
+   "t": "Time to a deck",
+   "why": "Average time per brief (shorter is better)",
+   "b": 38.8,
+   "w": 31.8,
+   "bs": "39 s",
+   "ws": "32 s",
+   "up": "18%",
+   "upNote": "faster per deck: 39 s → 32 s"
+  }
  ],
- "method": "8 realistic business briefs (investment memo, sales review, market entry, launch plan, cost programme, hiring plan, churn analysis, capex proposal), the same flagship model (C1) at the same effort. 'On its own' is the model asked directly to write the deck in the chat; it returns slide text and Markdown tables, not a designed file. 'Wrexlyn' is the same model through Wrexlyn's design-and-review pipeline, rendered in the default dark theme. Measured automatically, not hand-scored. Neither side used a figure that isn't in the brief or can't be worked out from it (0 and 0). Results vary with the brief and the engine you connect."
+ "method": "8 realistic business briefs (investment memo, sales review, market entry, launch plan, cost programme, hiring plan, churn analysis, capex proposal), the same flagship model (C1) at the same effort. 'On its own' is the model asked directly to write the deck in the chat; it returns slide text and Markdown tables, not a designed file. 'Wrexlyn' is the same model through Wrexlyn's design-and-review pipeline, rendered in the default dark theme. Measured automatically, not hand-scored. “pts” means percentage points: the change in a share, used where the starting share is 0%. Neither side used a figure that isn't in the brief or can't be worked out from it (0 and 0). Results vary with the brief and the engine you connect."
 }

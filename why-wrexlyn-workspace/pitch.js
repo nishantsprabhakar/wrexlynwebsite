@@ -196,7 +196,7 @@
     var b = D.base, w = D.wrexlyn, esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
     var tile = function (m) {
       var max = Math.max(m.b, m.w, 1);
-      return '<div class="dt">' + (m.up ? '<span class="up">' + esc(m.up) + "</span>" : "") + "<h3>" + esc(m.t) + '</h3><p class="why">' + esc(m.why) + "</p>" +
+      return '<div class="dt"><div class="imp"><b>' + esc(m.up) + "</b><span>" + esc(m.upNote || "") + "</span></div><h3>" + esc(m.t) + '</h3><p class="why">' + esc(m.why) + "</p>" +
         '<div class="rowd"><span class="lab">On its own</span><span class="track"><i class="fill a" data-w="' + (m.b / max) * 100 + '"></i></span><span class="val">' + esc(m.bs) + "</span></div>" +
         '<div class="rowd w"><span class="lab">Wrexlyn</span><span class="track"><i class="fill b" data-w="' + (m.w / max) * 100 + '"></i></span><span class="val">' + esc(m.ws) + "</span></div></div>";
     };

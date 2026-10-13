@@ -260,13 +260,19 @@ html.embedded .nav,html.embedded .progress{display:none}
 .duel.in .dt{opacity:1;transform:none}
 .duel.in .dt:nth-child(2){transition-delay:.12s}.duel.in .dt:nth-child(3){transition-delay:.24s}.duel.in .dt:nth-child(4){transition-delay:.36s}.duel.in .dt:nth-child(5){transition-delay:.48s}
 .dt::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(140deg,rgba(0,217,255,.55),transparent 40%,rgba(124,92,255,.5));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.dt{display:flex;flex-direction:column}
+.dt .imp{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding-bottom:14px;margin-bottom:14px;border-bottom:1px solid var(--line)}
+.dt .imp b{font:700 clamp(34px,9vw,44px)/1 var(--disp);letter-spacing:-.02em;white-space:nowrap;background:linear-gradient(100deg,#fff,var(--a2) 55%,var(--a3));-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 18px rgba(0,217,255,.25))}
+.dt .imp span{font-size:13px;line-height:1.35;color:var(--mute)}
 .dt h3{font:600 15px var(--disp);color:var(--ink);margin-bottom:4px}
-.dt .why{font-size:13px;color:var(--dim);min-height:2.6em}
-.dt .up{position:absolute;top:18px;right:18px;padding:4px 10px;border-radius:20px;font:700 12.5px var(--mono);color:#04131a;background:linear-gradient(135deg,var(--a2),var(--a3));box-shadow:0 0 22px -6px var(--a2)}
-.dt .rowd{display:grid;grid-template-columns:78px 1fr auto;gap:10px;align-items:center;margin-top:12px;font-size:13px}
+.dt .why{font-size:13px;color:var(--dim);flex:1;margin-bottom:4px}
+.dt .rowd{display:grid;grid-template-columns:76px minmax(0,1fr) 74px;gap:10px;align-items:center;margin-top:12px;font-size:13px}
 .dt .rowd .lab{color:var(--mute)}
 .dt .rowd .track{height:12px;border-radius:8px;background:rgba(255,255,255,.06);overflow:hidden}
 .dt .rowd .fill{display:block;height:100%;width:0;border-radius:8px;transition:width 1.3s cubic-bezier(.2,.8,.2,1) .3s}
 .dt .rowd .fill.a{background:#5d6690}.dt .rowd .fill.b{background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));box-shadow:0 0 16px -4px var(--a2)}
-.dt .rowd .val{text-align:right;white-space:nowrap;min-width:58px;font:600 13.5px var(--mono);color:var(--ink)}
+.dt .rowd .val{text-align:right;white-space:nowrap;font:600 13.5px var(--mono);color:var(--ink)}
 .dt .rowd.w .lab{color:var(--a2);font-weight:600}
+/* five tiles without a lone one on the last row: 2+2+1 (full width) on tablets, 3+2 on wide screens */
+@media (min-width:640px){.duel{grid-template-columns:repeat(2,minmax(0,1fr))}.dt:last-child{grid-column:1/-1}.dt .imp span{min-height:2.7em}}
+@media (min-width:1000px){.duel{grid-template-columns:repeat(6,minmax(0,1fr))}.dt{grid-column:span 2}.dt:nth-child(n+4),.dt:last-child{grid-column:span 3}}
