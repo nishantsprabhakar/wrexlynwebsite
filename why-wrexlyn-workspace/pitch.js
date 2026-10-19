@@ -5,8 +5,10 @@
   "use strict";
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  // Reduced motion (common on Linux desktops and phones in battery saver) keeps the demos running — they change
+  // state rather than move — and only turns off smooth scrolling here and the large movement in the CSS.
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var wait = function (ms) { return new Promise(function (r) { setTimeout(r, reduce ? 0 : ms); }); };
+  var wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
 
   $$(".cr-yr").forEach(function (e) { e.textContent = new Date().getFullYear(); });
 
@@ -17,15 +19,28 @@
 
   /* reveals; sections start their animation the first time they come into view */
   var starters = {};
-  var io = new IntersectionObserver(function (es) {
+  function begin(el) { el.classList.add("in"); var go = starters[el.id]; if (go) { delete starters[el.id]; go(); } }
+  var io = "IntersectionObserver" in window ? new IntersectionObserver(function (es) {
     es.forEach(function (e) {
       if (!e.isIntersecting) return;
-      e.target.classList.add("in");
-      var go = starters[e.target.id]; if (go) { delete starters[e.target.id]; go(); }
+      begin(e.target);
       io.unobserve(e.target);
     });
-  }, { threshold: 0.2 });
-  function watch(el) { if (el) io.observe(el); }
+  }, { threshold: 0 }) : null;
+  // backup for slow devices (a phone, Linux without graphics acceleration) where the observer can lag: each scroll also starts anything already on screen
+  var pending = [];
+  function sweep() {
+    if (!pending.length) return;
+    var h = innerHeight;
+    pending = pending.filter(function (el) {
+      if (el.classList.contains("in")) return false;
+      var r = el.getBoundingClientRect();
+      if (r.top < h && r.bottom > 0) { begin(el); if (io) io.unobserve(el); return false; }
+      return true;
+    });
+  }
+  addEventListener("scroll", sweep, { passive: true }); addEventListener("load", sweep);
+  function watch(el) { if (!el) return; pending.push(el); if (io) io.observe(el); else setTimeout(sweep, 0); }
   $$(".rv").forEach(watch);
 
   /* card glow follows the pointer */
@@ -44,7 +59,7 @@
       await wait(2600);
       num.className = "num good"; num.textContent = "₹3.8 cr"; demo.classList.add("done");
       setChip("good", "✓ Repaired and verified");
-      await wait(reduce ? 1e9 : 4200);
+      await wait(4200);
     }
   }
   heroLoop();
@@ -71,7 +86,7 @@
       if (now - t0 > 1900) { step = (step + 1) % 4; t0 = now; light(); }
       requestAnimationFrame(frame);
     }
-    starters.flow = function () { light(); if (!reduce) requestAnimationFrame(frame); else nodes.forEach(function (n) { n.classList.add("on"); }); };
+    starters.flow = function () { light(); requestAnimationFrame(frame); };
   }
 
   /* ---------------- Bot Wizard: a team forms, works in stages, and is verified ---------------- */
@@ -95,7 +110,7 @@
         st(3, "pass", "passed"); st(4, "work", "checking");
         for (var k = 1; k <= 8; k++) { crit(Math.min(k, 7)); await wait(260); }
         st(4, "pass", "done"); crit(7, " · verified with one exception, reported");
-        await wait(reduce ? 1e9 : 5200);
+        await wait(5200);
       }
     }
     starters.wiz = wizLoop;
@@ -111,7 +126,7 @@
     }
     function stepAlg() { if (paused) return; showAlg(ai); ai = (ai + 1) % algs.length; }
     algs.forEach(function (a, i) { a.addEventListener("click", function () { paused = true; ai = i; showAlg(i); clearTimeout(a._t); a._t = setTimeout(function () { paused = false; ai = (i + 1) % algs.length; }, 8000); }); });
-    starters.algo = function () { stepAlg(); if (!reduce) aTimer = setInterval(stepAlg, 1900); };
+    starters.algo = function () { stepAlg(); aTimer = setInterval(stepAlg, 1900); };
   }
 
   /* ---------------- the Proprietary Convergence Protocol: four mechanisms in order ---------------- */
@@ -123,7 +138,7 @@
       pbar.style.width = ((pk + 1) / ps.length) * 100 + "%";
       pk = (pk + 1) % ps.length;
     }
-    starters.pcp = function () { if (reduce) { ps.forEach(function (li) { li.classList.add("done"); }); pbar.style.width = "100%"; return; } stepPcp(); setInterval(stepPcp, 2200); };
+    starters.pcp = function () { stepPcp(); setInterval(stepPcp, 2200); };
   }
 
   /* ---------------- bots: a day of activity ---------------- */
@@ -148,7 +163,7 @@
           await wait(1500);
           if (d[1] === "ask") { await wait(900); li.className = "okd"; li.querySelector(".ok").textContent = "Approved ✓"; await wait(700); }
         }
-        await wait(reduce ? 1e9 : 4500);
+        await wait(4500);
       }
     }
     starters.feed = feedLoop;
@@ -160,7 +175,6 @@
   /* ---------------- measured results ---------------- */
   var stats = $("#stats");
   function countTo(el, to, fmt) {
-    if (reduce) { el.textContent = fmt(to); return; }
     var t0 = null; function s(t) { t0 = t0 || t; var p = Math.min(1, (t - t0) / 1300), e = 1 - Math.pow(1 - p, 3); el.textContent = fmt(to * e); if (p < 1) requestAnimationFrame(s); }
     requestAnimationFrame(s);
   }

@@ -103,7 +103,7 @@ h3{font:600 18px var(--disp);margin:10px 0 6px}
 .wires path{fill:none;stroke:rgba(255,255,255,.12);stroke-width:2.5}
 .flow.in .wires path{stroke:url(#gA);stroke-dasharray:6 10;animation:flowdash 1.2s linear infinite}
 @keyframes flowdash{to{stroke-dashoffset:-32}}
-.pulses .p{fill:#fff;filter:url(#glow);opacity:0}
+.pulses .p{fill:#fff;stroke:rgba(0,217,255,.45);stroke-width:5;paint-order:stroke;opacity:0}
 .node rect,.node circle{fill:#0c1330;stroke:rgba(255,255,255,.18);stroke-width:1.5;transition:all .5s}
 .node text{fill:var(--ink);font:600 17px var(--disp);text-anchor:middle}
 .node text.sm{font:500 12px var(--font);fill:var(--mute)}
@@ -198,10 +198,11 @@ h3{font:600 18px var(--disp);margin:10px 0 6px}
   .hero{min-height:auto;padding-top:40px}
   .scroll-cue{display:none}
 }
+/* reduced motion: calmer, not frozen — the demos still step through; the large movement stops */
 @media (prefers-reduced-motion:reduce){
-  .rv{opacity:1;transform:none;transition:none}
-  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
-  .bot{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+  .aurora i,.scan,.scroll-cue span{animation:none}
+  .rv,.bot,.dt,.page i,.pcp-steps li{transform:none!important}
 }
 
 /* algorithms */
