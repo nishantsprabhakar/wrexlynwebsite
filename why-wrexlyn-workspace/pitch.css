@@ -277,3 +277,8 @@ html.embedded .nav,html.embedded .progress{display:none}
 /* five tiles without a lone one on the last row: 2+2+1 (full width) on tablets, 3+2 on wide screens */
 @media (min-width:640px){.duel{grid-template-columns:repeat(2,minmax(0,1fr))}.dt:last-child{grid-column:1/-1}.dt .imp span{min-height:2.7em}}
 @media (min-width:1000px){.duel{grid-template-columns:repeat(6,minmax(0,1fr))}.dt{grid-column:span 2}.dt:nth-child(n+4),.dt:last-child{grid-column:span 3}}
+
+/* the download, prominent */
+.nav .cta-dl{background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff;border-color:transparent;margin-right:8px}
+.ctas .btn.dl{border-color:rgba(0,217,255,.55);color:var(--ink);background:rgba(0,217,255,.1)}
+html.embedded .nav .cta-dl{display:none}
