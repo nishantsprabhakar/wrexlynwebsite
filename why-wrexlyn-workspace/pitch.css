@@ -282,3 +282,18 @@ html.embedded .nav,html.embedded .progress{display:none}
 .nav .cta-dl{background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff;border-color:transparent;margin-right:8px}
 .ctas .btn.dl{border-color:rgba(0,217,255,.55);color:var(--ink);background:rgba(0,217,255,.1)}
 html.embedded .nav .cta-dl{display:none}
+
+/* the download, in every footer */
+.dl-foot{display:inline-flex;align-items:center;gap:6px;margin:0 6px 6px 0;padding:6px 14px;border-radius:999px;font:600 12px/1.3 Inter,system-ui,sans-serif;color:#fff!important;text-decoration:none!important;background:linear-gradient(135deg,#7c5cff,#00d9ff);box-shadow:0 8px 22px -12px #00d9ff;vertical-align:middle;white-space:nowrap}
+.dl-foot:hover{filter:brightness(1.08)}
+
+/* product screenshots (research, bots, concept graphs) */
+.shot{margin:0;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#05070f;box-shadow:0 40px 100px -40px rgba(0,217,255,.35)}
+.shot img{display:block;width:100%;height:auto}
+.shot figcaption{padding:12px 16px;font-size:13.5px;color:var(--mute);border-top:1px solid var(--line);background:var(--glass)}
+.shot.wide{margin-top:28px}
+.shot.space{box-shadow:0 40px 120px -30px rgba(124,92,255,.55)}
+.rs-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:20px;margin-top:44px;align-items:start}
+.rs-feats{display:grid;gap:12px}
+.gr-feats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+@media (max-width:980px){.rs-grid{grid-template-columns:1fr}.gr-feats{grid-template-columns:1fr}}
